@@ -24,5 +24,7 @@ declare module '@vue/runtime-core' {
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SiderBar: typeof import('./src/components/Layout/SiderBar.vue')['default']
+    SubMenuTree: typeof import('./src/components/Layout/SubMenuTree.vue')['default']
   }
 }

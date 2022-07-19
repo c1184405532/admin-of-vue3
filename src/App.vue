@@ -9,11 +9,11 @@ console.log(123);
 
 <template>
   <Layout/>
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <!-- <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3 + TypeScript+ Vite" />
   <a-button type="primary">Primary Button</a-button>
   <a-input placeholder="Basic usage" />
-  <a-rate value="2" />
+  <a-rate value="2" /> -->
 </template>
 
 <style>
@@ -23,6 +23,5 @@ console.log(123);
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
