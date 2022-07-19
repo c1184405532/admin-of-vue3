@@ -24,6 +24,9 @@ module.exports = {
 			"avoidEscape": true,
 			"allowTemplateLiterals": true
 		}],
+		"vue/multi-word-component-names": ["error", { // 由于个人需要index作为目录主文件输出，所以配置过滤。 新版校验组件规则 https://eslint.vuejs.org/rules/multi-word-component-names.html。
+			"ignores": ["index"]
+		}]
 		// "object-curly-spacing": ["error", "always"]
 		// "space-before-function-paren": ["error", "never"],
     // "no-mixed-spaces-and-tabs": "on",
