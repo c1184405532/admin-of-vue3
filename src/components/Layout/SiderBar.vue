@@ -29,6 +29,7 @@ export default defineComponent({
   },
   methods: {
     handClick(e: any) {
+      this.$router.push(e.key)
       console.log(e);
     },
   },
