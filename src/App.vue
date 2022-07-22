@@ -1,23 +1,20 @@
+
+
+<template>
+  <router-view></router-view>
+</template>
+
 <script setup lang="ts">
+
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from "./components/HelloWorld.vue";
-import Layout from "./components/Layout/index.vue";
-console.log(123);
 
 </script>
 
-<template>
-  <Layout/>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript+ Vite" />
-  <a-button type="primary">Primary Button</a-button>
-  <a-input placeholder="Basic usage" />
-  <a-rate value="2" /> -->
-</template>
-
 <style>
 #app {
+  height: 100vh;
+  width: 100vw;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
