@@ -1,9 +1,9 @@
 <template>
   <template v-for="v in props.list">
-    <a-menu-item v-if="!v.children" :key="v.path || v.title">
+    <a-menu-item v-if="!v.children" :key="v.path">
       <span>{{ v.title }}</span>
     </a-menu-item>
-    <a-sub-menu v-if="v.children" :key="v.path || v.title">
+    <a-sub-menu v-if="v.children" :key="v.path">
       <template #title>
         <span>
           <span>{{ v.title }}</span>
@@ -15,8 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import { SiderBarMenuTree } from "./const";
+
+import { RouteRecordRawType } from "@/router/types";
 const props = defineProps<{
-  list: SiderBarMenuTree[];
+  list: RouteRecordRawType[];
 }>();
+
 </script>

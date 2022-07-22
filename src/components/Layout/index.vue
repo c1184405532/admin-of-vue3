@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+
 import { defineComponent, ref } from "vue";
 import SiderBar from "./SiderBar.vue";
 export default defineComponent({
@@ -28,5 +29,6 @@ export default defineComponent({
     };
   },
 });
+
 </script>
 

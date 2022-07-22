@@ -13,22 +13,25 @@
 </template>
 
 <script lang="ts">
+
 import { defineComponent, ref } from "vue";
-import { siderBarList } from "./const.js";
+import { layoutRoutes } from "@/router";
+import { MenuItemCallBack } from "./types";
 import SubMenuTree from "./SubMenuTree.vue";
+
 export default defineComponent({
   components: {
     SubMenuTree
   },
   data() {
     return {
-      siderBarList,
+      siderBarList: layoutRoutes,
       collapsed: ref<boolean>(false),
       selectedKeys: ref<string[]>(["1"]),
     };
   },
   methods: {
-    handClick(e: any) {
+    handClick(e: MenuItemCallBack) {
       this.$router.push(e.key)
       console.log(e);
     },

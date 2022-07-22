@@ -1,17 +1,26 @@
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
-
+import { RouteRecordRawType } from "./types";
 import Home from "../pages/home/index.vue";
 import Table from "../pages/table/index.vue";
 
-const routes = [
-  { path: "/", redirect: "/home" },
-  { path: "/home", component: Home },
-  { path: "/table", component: Table },
+
+
+const baseRoutes = [
+  { path: "/", redirect: "/home" }
+]
+
+const layoutRoutes: RouteRecordRawType[] = [
+  { title: "首页", path: "/home", component: Home},
+  { title: "表格页", path: "/table", component: Table },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [...baseRoutes, ...layoutRoutes],
 })
 
 export default router;
+
+export {
+  layoutRoutes
+}
