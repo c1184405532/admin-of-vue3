@@ -13,17 +13,17 @@
         <a-form-item
           label="Username"
           name="username"
-          :rules="[{ required: true, message: 'Please input your username!' }]"
+          :rules="[{ required: true, message: 'Please input admin' }]"
         >
-          <a-input v-model:value="formState.username" />
+          <a-input v-model:value="formState.username" placeholder="Please input admin" />
         </a-form-item>
 
         <a-form-item
           label="Password"
           name="password"
-          :rules="[{ required: true, message: 'Please input your password!' }]"
+          :rules="[{ required: true, message: 'Please input 123456!' }]"
         >
-          <a-input-password v-model:value="formState.password" />
+          <a-input-password v-model:value="formState.password" placeholder="Please input 123456" />
         </a-form-item>
 
         <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
@@ -31,7 +31,7 @@
         </a-form-item>
 
         <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-          <a-button type="primary" html-type="submit">Submit</a-button>
+          <a-button type="primary" html-type="submit">login</a-button>
         </a-form-item>
       </a-form>
     </div>
@@ -39,37 +39,40 @@
   
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+<script lang="ts" setup>
+import { reactive, ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
-interface FormState {
-  username: string;
-  password: string;
-  remember: boolean;
-}
+  interface FormState {
+    username: string;
+    password: string;
+    remember: boolean;
+  }
+  
+  const formState = reactive<FormState>({
+    username: "",
+    password: "",
+    remember: true,
+  });
 
-export default defineComponent({
-  components: {},
-  setup() {
-    const formState = reactive<FormState>({
-      username: "",
-      password: "",
-      remember: true,
-    });
-    const onFinish = (values: unknown) => {
-      console.log("Success:", values);
-    };
+  onMounted(() => {
+    const token = localStorage.getItem("USER_TOKEN");
+    if (token) router.replace({ name: "home" });
+  })
 
-    const onFinishFailed = (errorInfo: unknown) => {
-      console.log("Failed:", errorInfo);
-    };
-    return {
-      formState,
-      onFinish,
-      onFinishFailed,
-    };
-  },
-});
+  const router = useRouter();
+
+  const onFinish = ({ username, password }: FormState) => {
+    if (username === "admin" && password === "123456") {
+      localStorage.setItem("USER_TOKEN", "ADMIN")
+      router.replace({ name: "home" });
+    }
+  };
+
+  const onFinishFailed = (errorInfo: unknown) => {
+    console.log("Failed:", errorInfo);
+  };
+
 </script>
 
 <style>

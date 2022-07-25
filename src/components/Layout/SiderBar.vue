@@ -32,7 +32,7 @@ export default defineComponent({
   },
   methods: {
     handClick(e: MenuItemCallBack) {
-      this.$router.push(e.key)
+      this.$router.push({ name: e.key })
       console.log(e);
     },
   },

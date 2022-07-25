@@ -14,3 +14,9 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
 
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+
+
+## 路径别名配置
+
+1. vite.config.ts中配置 resolve.alias
+2. 如果是ts版本，在tsconfig.json中配置 baseUrl & paths: {"@/*", ["src/*"]} key是你的别名，数组中的value是你的路径
