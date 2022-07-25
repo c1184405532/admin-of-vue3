@@ -18,5 +18,5 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 ## 路径别名配置
 
-1. vite.config.ts中配置 resolve.alias
-2. 如果是ts版本，在tsconfig.json中配置 baseUrl & paths: {"@/*", ["src/*"]} key是你的别名，数组中的value是你的路径
+1. vite.config.ts中配置 resolve.alias [参考资料](https://cn.vitejs.dev/config/shared-options.html#resolve-alias)
+2. 如果是ts版本，还需要在tsconfig.json中配置 baseUrl & paths: {"@/*", ["src/*"]} key是你的别名，数组中的value是你的路径

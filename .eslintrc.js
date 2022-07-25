@@ -27,7 +27,7 @@ module.exports = {
 		"vue/multi-word-component-names": ["error", { // 由于个人需要index作为目录主文件输出，所以配置过滤。 新版校验组件规则 https://eslint.vuejs.org/rules/multi-word-component-names.html。
 			"ignores": ["index"]
 		}],
-		"@typescript-eslint/no-var-requires": "off"
+		"@typescript-eslint/no-var-requires": "off" // 关闭使用require导入文件提示错误，如果是ts版本还需安装 @types/node 依赖包
 		// "object-curly-spacing": ["error", "always"]
 		// "space-before-function-paren": ["error", "never"],
     // "no-mixed-spaces-and-tabs": "on",
