@@ -3,7 +3,10 @@
     <SiderBar />
 
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0" />
+      <a-layout-header style="background: #fff; padding: 0" >
+        <HeaderBar/>
+      </a-layout-header>
+
       <a-layout-content style="margin: 0 16px">
         <router-view></router-view>
       </a-layout-content>
@@ -18,9 +21,11 @@
 
 import { defineComponent, ref } from "vue";
 import SiderBar from "./SiderBar.vue";
+import HeaderBar from "./HeaderBar.vue";
 export default defineComponent({
   components: {
-    SiderBar
+    SiderBar,
+    HeaderBar
   },
   data() {
     return {

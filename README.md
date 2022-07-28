@@ -20,3 +20,14 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 1. vite.config.ts中配置 resolve.alias [参考资料](https://cn.vitejs.dev/config/shared-options.html#resolve-alias)
 2. 如果是ts版本，还需要在tsconfig.json中配置 baseUrl & paths: {"@/*", ["src/*"]} key是你的别名，数组中的value是你的路径
+
+## less配置
+
+1. vite3中提供了对 .scss, .sass, .less, .styl 和 .stylus 文件的内置支持。没有必要为他们安装特定的 vite 插件，只需安装预处理器依赖本身。
+2. 安装less：npm i less -D
+
+## antd主题色配置
+
+1. 在vite.config文件下的defineConfig函数参数中定义 css.preprocessorOptions.less 选项。[参考资料](https://www.antdv.com/docs/vue/customize-theme-cn)
+2. 在vite.config配置plugins中的 AntDesignVueResolver 传入构造参数 importStyle: "less"
+3. 当你想设置自定义主题时请在 antd.theme.ts 文件修改即可。（在vite.config文件中导入模块需要在 tsconfig.node.json 的 include 选项配置，否则会提示错误信息）
