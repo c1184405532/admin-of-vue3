@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
   interface FormState {
     username: string;
@@ -61,11 +61,18 @@ import { useRouter } from "vue-router";
   })
 
   const router = useRouter();
+  const route = useRoute();
 
   const onFinish = ({ username, password }: FormState) => {
+    const { query } = route
     if (username === "admin" && password === "123456") {
-      localStorage.setItem("USER_TOKEN", "ADMIN")
-      router.replace({ name: "home" });
+      localStorage.setItem("USER_TOKEN", "ADMIN");
+      const routePayload: {path?: string, name?: string} = {};
+
+      if (query.redirect) routePayload.path = <string>query.redirect;
+      else routePayload.name = "home";
+      
+      router.replace(routePayload);
     }
   };
 

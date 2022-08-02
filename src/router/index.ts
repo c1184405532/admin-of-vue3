@@ -50,7 +50,7 @@ const layoutRoutes: RouteRecordRawType[] = [
 
 const baseRoutes = [
   { path: "/", redirect: "/login" },
-  { path: "/login", component: Login },
+  { path: "/login", name: "login", component: Login },
   { path: "/layout", component: Layout, children: layoutRoutes },
 ];
 
@@ -58,6 +58,13 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [...baseRoutes],
 });
+
+// https://router.vuejs.org/zh/guide/advanced/navigation-guards.html
+router.beforeEach(async (to) => {
+  const token = localStorage.getItem("USER_TOKEN");
+  // 关于接口请求返回登陆过期问题，使用 router.push({ name: "login", query: { redirect: current.path }})
+  if (!token && to.name !== "login") return { name: "login", query: { redirect: to.path } }
+})
 
 export default router;
 

@@ -17,7 +17,7 @@
               关于
             </a-menu-item>
             <a-menu-divider />
-            <a-menu-item key="3" disabled>disabled</a-menu-item>
+            <a-menu-item key="3" @click="onLogout">退出</a-menu-item>
           </a-menu>
         </template>
       </a-dropdown>
@@ -28,6 +28,14 @@
 <script lang="ts" setup>
 
 import { QuestionOutlined, TeamOutlined } from "@ant-design/icons-vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const onLogout = () => {
+  localStorage.removeItem("USER_TOKEN");
+  router.replace({ name: "login" });
+}
 
 </script>
   
