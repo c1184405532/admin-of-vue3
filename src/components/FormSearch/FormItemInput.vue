@@ -14,7 +14,7 @@
 <script lang="ts" setup>
   import { ref, watch, defineProps, defineEmits } from "vue";
   
-  const emits = defineEmits(["onValue", "update:modelValue"]);
+  const emits = defineEmits(["update:modelValue"]);
   const props = defineProps(["modelValue", "props", "name", "label", "rules"]);
 
   const inputValue = ref(props.modelValue);

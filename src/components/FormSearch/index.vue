@@ -7,15 +7,19 @@
       @finish="onFinish"
     >
       <a-row :gutter="24">
-        <template v-for="list in formList" :key="list.key">
-          <a-col :span="8">
+        <template v-for="(item, i) in formList" :key="item.key">
+          <a-col :span="8" v-show="expand || i <= 6">
             <FormItemInput
-              v-if="list.type === `input`"
-              v-model="formState[list.key]"
-              :name="list.key"
-              :label="list.label"
-              :rules="list.rules"
-              :props="list.props"
+              v-if="item.type === `input`"
+              v-model="formState[item.key]"
+              v-bind="item"
+              :name="item.key"
+            />
+            <FormItemSelect
+              v-if="item.type === `select`"
+              v-model="formState[item.key]"
+              v-bind="item"
+              :name="item.key"
             />
           </a-col>
 
@@ -68,6 +72,7 @@
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
   import FormItemInput from "./FormItemInput.vue";
+  import FormItemSelect from "./FormItemSelect.vue";
 
   import { formList as FormList, FormListRowType, AnyPropName } from "./const";
 
