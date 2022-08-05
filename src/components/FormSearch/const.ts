@@ -19,6 +19,23 @@ const addressOptions = [
   { label: "北京", value: "010" },
 ]
 
+const cityOptions = [
+  {
+    label: "成都", value: "028", children: [
+      { label: "武侯区", value: "0281" },
+      { label: "锦江区", value: "0282" },
+      { label: "成华区", value: "0283" }
+    ]
+  },
+  {
+    label: "北京", value: "010", children: [
+      { label: "丰台区", value: "0101" },
+      { label: "朝阳区", value: "0102" },
+      { label: "东城区", value: "0103" }
+    ]
+  },
+]
+
 const formList = [
   {
     key: "userName",
@@ -31,11 +48,23 @@ const formList = [
   },
   {
     key: "age",
-    type: "input",
+    type: "input-number",
     label: "年龄",
     defaultValue: 20,
     props: {
-      placeholder: "请输入年龄"
+      placeholder: "请输入年龄",
+      min: 1,
+      max: 100
+    }
+  },
+  {
+    key: "textarea",
+    type: "textarea",
+    label: "描述信息",
+    defaultValue: "",
+    props: {
+      placeholder: "请输入描述信息",
+      autoSize: true
     }
   },
   {
@@ -45,9 +74,22 @@ const formList = [
     defaultValue: undefined,
     options: addressOptions,
     props: {
-      mode: "multiple",
+      // mode: "multiple",
       showSearch: true,
       placeholder: "请选择地址"
+    }
+  },
+  {
+    key: "city",
+    type: "tree-select",
+    label: "城市",
+    defaultValue: undefined,
+    options: cityOptions,
+    props: {
+      // multiple: true,
+      // treeCheckable: true,
+      showSearch: true,
+      placeholder: "请选择城市"
     }
   }
 ]

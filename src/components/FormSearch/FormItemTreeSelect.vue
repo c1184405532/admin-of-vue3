@@ -4,18 +4,18 @@
     :label="props.label"
     :rules="props.rules"
   >
-    <a-select
+    <a-tree-select
       v-model:value="selectValue"
-      :filterOption="filterOption"
+      :filterTreeNode="filterOption"
       v-bind:="props.props"
-      :options="props.options"
+      :treeData="props.options"
     />
   </a-form-item>
 </template>
 
 <script lang="ts" setup>
 
-  // props.props 详细参数请查阅官方文档 https://antdv.com/components/select-cn#API
+  // props.props 详细参数请查阅官方文档 https://antdv.com/components/tree-select-cn#API
 
   import { ref, watch, defineProps, defineEmits } from "vue";
   

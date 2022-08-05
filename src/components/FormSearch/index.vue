@@ -15,17 +15,35 @@
               v-bind="item"
               :name="item.key"
             />
+            <FormItemInputNumber
+              v-if="item.type === `input-number`"
+              v-model="formState[item.key]"
+              v-bind="item"
+              :name="item.key"
+            />
+            <FormItemTextArea
+              v-if="item.type === `textarea`"
+              v-model="formState[item.key]"
+              v-bind="item"
+              :name="item.key"
+            />
             <FormItemSelect
               v-if="item.type === `select`"
               v-model="formState[item.key]"
               v-bind="item"
               :name="item.key"
             />
+            <FormItemTreeSelect
+              v-if="item.type === `tree-select`"
+              v-model="formState[item.key]"
+              v-bind="item"
+              :name="item.key"
+            />    
           </a-col>
 
         </template>
         
-        <a-col :span="8">
+        <!-- <a-col :span="8">
           <a-form-item
             :name="`field1`"
             :label="`请输入年龄`"
@@ -33,7 +51,7 @@
           >
             <a-input placeholder="请输入姓名" v-model:value="formState['field1']"></a-input>
           </a-form-item>
-        </a-col>
+        </a-col> -->
 
 
         <!-- <template v-for="i in 10" :key="i">
@@ -72,7 +90,10 @@
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
   import FormItemInput from "./FormItemInput.vue";
+  import FormItemInputNumber from "./FormItemInputNumber.vue";
+  import FormItemTextArea from "./FormItemTextArea.vue";
   import FormItemSelect from "./FormItemSelect.vue";
+  import FormItemTreeSelect from "./FormItemTreeSelect.vue";
 
   import { formList as FormList, FormListRowType, AnyPropName } from "./const";
 

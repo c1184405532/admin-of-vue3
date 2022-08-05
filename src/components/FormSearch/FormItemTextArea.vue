@@ -4,16 +4,16 @@
     :label="props.label"
     :rules="props.rules"
   >
-    <a-input
+    <a-textarea
       v-model:value="inputValue"
       v-bind:="props.props"
-    ></a-input>
+    />
   </a-form-item>
 </template>
 
 <script lang="ts" setup>
 
-  // props.props 详细参数请查阅官方文档 https://antdv.com/components/input-cn/#API
+  // props.props 详细参数请查阅官方文档（TextArea） https://antdv.com/components/input-cn/#API
 
   import { ref, watch, defineProps, defineEmits } from "vue";
   
