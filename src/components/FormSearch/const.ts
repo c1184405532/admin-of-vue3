@@ -91,6 +91,20 @@ const formList = [
       showSearch: true,
       placeholder: "请选择城市"
     }
+  },
+  {
+    key: "date",
+    type: "date-picker",
+    label: "选择日期",
+    defaultValue: undefined,
+    options: cityOptions,
+    props: {
+      // multiple: true,
+      // treeCheckable: true,
+      // picker: "quarter",
+      picker: "week",
+      placeholder: "请选择日期"
+    }
   }
 ]
 

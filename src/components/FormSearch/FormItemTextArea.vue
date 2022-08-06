@@ -6,7 +6,7 @@
   >
     <a-textarea
       v-model:value="inputValue"
-      v-bind:="props.props"
+      v-bind="props.props"
     />
   </a-form-item>
 </template>

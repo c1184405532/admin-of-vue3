@@ -7,7 +7,7 @@
     <a-input-number
       class="form-item-input-number"
       v-model:value="inputValue"
-      v-bind:="props.props"
+      v-bind="props.props"
     />
   </a-form-item>
 </template>

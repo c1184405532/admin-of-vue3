@@ -7,7 +7,7 @@
     <a-tree-select
       v-model:value="selectValue"
       :filterTreeNode="filterOption"
-      v-bind:="props.props"
+      v-bind="props.props"
       :treeData="props.options"
     />
   </a-form-item>

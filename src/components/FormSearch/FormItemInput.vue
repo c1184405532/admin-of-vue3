@@ -6,7 +6,7 @@
   >
     <a-input
       v-model:value="inputValue"
-      v-bind:="props.props"
+      v-bind="props.props"
     ></a-input>
   </a-form-item>
 </template>

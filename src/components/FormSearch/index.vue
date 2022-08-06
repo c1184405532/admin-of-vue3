@@ -38,7 +38,13 @@
               v-model="formState[item.key]"
               v-bind="item"
               :name="item.key"
-            />    
+            />
+            <FormItemDatePicker
+              v-if="item.type === `date-picker`"
+              v-model="formState[item.key]"
+              v-bind="item"
+              :name="item.key"
+            />
           </a-col>
 
         </template>
@@ -94,6 +100,7 @@
   import FormItemTextArea from "./FormItemTextArea.vue";
   import FormItemSelect from "./FormItemSelect.vue";
   import FormItemTreeSelect from "./FormItemTreeSelect.vue";
+  import FormItemDatePicker from "./FormItemDatePicker.vue";
 
   import { formList as FormList, FormListRowType, AnyPropName } from "./const";
 

@@ -7,7 +7,7 @@
     <a-select
       v-model:value="selectValue"
       :filterOption="filterOption"
-      v-bind:="props.props"
+      v-bind="props.props"
       :options="props.options"
     />
   </a-form-item>
