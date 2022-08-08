@@ -9,7 +9,14 @@
       <a-row :gutter="24">
         <template v-for="(item, i) in formList" :key="item.key">
           <a-col :span="8" v-show="expand || i <= 6">
-            <FormItemInput
+            <component 
+              :is="ComponentMap[item.type]" 
+              v-model="formState[item.key]" 
+              v-bind="item"
+              :name="item.key"
+            />
+
+            <!-- <FormItemInput
               v-if="item.type === `input`"
               v-model="formState[item.key]"
               v-bind="item"
@@ -44,21 +51,10 @@
               v-model="formState[item.key]"
               v-bind="item"
               :name="item.key"
-            />
+            /> -->
           </a-col>
 
         </template>
-        
-        <!-- <a-col :span="8">
-          <a-form-item
-            :name="`field1`"
-            :label="`请输入年龄`"
-            :rules="[{ required: true, message: 'input age' }]"
-          >
-            <a-input placeholder="请输入姓名" v-model:value="formState['field1']"></a-input>
-          </a-form-item>
-        </a-col> -->
-
 
         <!-- <template v-for="i in 10" :key="i">
           <a-col v-show="expand || i <= 6" :span="8">
@@ -95,21 +91,13 @@
   import type { FormInstance } from "ant-design-vue";
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
-  import FormItemInput from "./FormItemInput.vue";
-  import FormItemInputNumber from "./FormItemInputNumber.vue";
-  import FormItemTextArea from "./FormItemTextArea.vue";
-  import FormItemSelect from "./FormItemSelect.vue";
-  import FormItemTreeSelect from "./FormItemTreeSelect.vue";
-  import FormItemDatePicker from "./FormItemDatePicker.vue";
-
   import { formList as FormList, FormListRowType, AnyPropName } from "./const";
+  import ComponentMap from "@/components/FormItemComs";
 
   const expand = ref(false);
   const formRef = ref<FormInstance>();
   const formState = reactive<AnyPropName>({});
   const formList = reactive<Array<FormListRowType>>(FormList);
-
-
 
   watch(formState, (ov, nv) => {
     console.log("ov", ov);
@@ -130,4 +118,5 @@
       formState[v.key] = v.defaultValue;
     }) 
   }
+
 </script>

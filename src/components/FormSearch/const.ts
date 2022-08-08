@@ -99,10 +99,8 @@ const formList = [
     defaultValue: undefined,
     options: cityOptions,
     props: {
-      // multiple: true,
-      // treeCheckable: true,
-      // picker: "quarter",
-      picker: "week",
+      picker: "quarter",
+      // picker: "week",
       placeholder: "请选择日期"
     }
   }
