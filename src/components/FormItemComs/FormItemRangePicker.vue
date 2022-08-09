@@ -4,8 +4,8 @@
     :label="props.label"
     :rules="props.rules"
   >
-    <a-date-picker
-      class="form-item-date-picker"
+    <a-range-picker
+      class="form-item-date-range-picker"
       v-model:value="dateValue"
       :format="dateFormat"
       :valueFormat="dateValueFormat"
@@ -56,7 +56,7 @@
       "year": "YYYY",
       "quarter": "YYYY-[Q]Q",
       "month": "YYYY-MM",
-      "week": "YYYY-ww[周]",
+      "week": "YYYY-ww[周]"
     }
 
     const formatValueMap: DateType = {
@@ -65,17 +65,16 @@
       "week": "YYYY-MM-DD:YYYY-ww[周]"
     }
 
-    const showTimeFormat = dateProps?.showTime?.format;
-    const dateDefaultFormat = `YYYY-MM-DD${showTimeFormat ? ` ${showTimeFormat}` : ""}`; // 未设置picker 默认选择日期时
+    // todo 设置默认选项
 
     // 如需自定义值的格式请自行更改 formatValueMap 或者直接在props.props中定义 {valueFormat: "YYYY-MM-DD" or your format}
-    dateFormat.value = formatMap[dateProps.picker] || dateDefaultFormat;
-    dateValueFormat.value = formatValueMap[dateProps.picker] || dateDefaultFormat;
+    dateFormat.value = formatMap[dateProps.picker];
+    dateValueFormat.value = formatValueMap[dateProps.picker];
   }
 </script>
 
 <style lang="less" scoped>
-  .form-item-date-picker{
+  .form-item-date-range-picker{
     width: 100%;
   }
 </style>

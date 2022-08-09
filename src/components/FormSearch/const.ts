@@ -3,10 +3,10 @@ interface FormListRowType {
   key: string,
   type: string,
   label: string,
-  defaultValue?: string | number | boolean,
+  defaultValue?: string | number | boolean | string[],
   rules?: [], // 校验规则
   options?: Array<AnyPropName>, // 选择框数据 
-  props?: object // 实际内容组件的props集合 如 a-input -> placeholeder
+  props?: object // 实际内容组件的props集合 如 a-input -> placeholeder; 详细信息请前往独立组件中的提示进行查看
 
 }
 
@@ -83,7 +83,7 @@ const formList = [
     key: "city",
     type: "tree-select",
     label: "城市",
-    defaultValue: undefined,
+    defaultValue: "028",
     options: cityOptions,
     props: {
       // multiple: true,
@@ -99,9 +99,23 @@ const formList = [
     defaultValue: undefined,
     options: cityOptions,
     props: {
-      picker: "quarter",
-      // picker: "week",
-      placeholder: "请选择日期"
+      // picker: "quarter",
+      //picker: "year",
+      placeholder: "请选择日期",
+      showTime: { format: "HH:mm:ss" }
+    }
+  }
+  ,
+  {
+    key: "dateRange",
+    type: "date-range-picker",
+    label: "选择日期",
+    defaultValue: ["2022-07-14:2022-29周", "2022-08-09:2022-33周"],
+    options: cityOptions,
+    props: {
+      // picker: "quarter",
+      picker: "week",
+      placeholder: ["开始日期", "结束日期"]
     }
   }
 ]

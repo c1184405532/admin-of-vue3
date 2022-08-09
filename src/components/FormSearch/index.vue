@@ -70,8 +70,8 @@
       </a-row>
       <a-row>
         <a-col :span="24" style="text-align: right">
-          <a-button type="primary" html-type="submit">Search</a-button>
-          <a-button style="margin: 0 8px" @click="() => formRef?.resetFields()">Clear</a-button>
+          <a-button type="primary" html-type="submit">查询</a-button>
+          <a-button style="margin: 0 8px" @click="() => formRef?.resetFields()">重置</a-button>
           <a style="font-size: 12px" @click="expand = !expand">
             <template v-if="expand">
               <UpOutlined />
