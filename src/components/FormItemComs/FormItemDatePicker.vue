@@ -20,7 +20,7 @@
   // dayjs格式化 https://day.js.org/docs/zh-CN/display/format
   // format 显示的文本格式; valueFormat 实际值的格式
 
-  import { ref, watch, defineProps, defineEmits, onBeforeMount } from "vue";
+  import { ref, watch, onBeforeMount } from "vue";
   
   const emits = defineEmits(["update:modelValue"]);
   const props = defineProps(["modelValue", "props", "name", "label", "rules", "options"]);

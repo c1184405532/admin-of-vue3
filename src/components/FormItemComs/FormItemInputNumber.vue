@@ -16,7 +16,7 @@
 
   // props.props 详细参数请查阅官方文档 https://antdv.com/components/input-number-cn#API
 
-  import { ref, watch, defineProps, defineEmits } from "vue";
+  import { ref, watch } from "vue";
   
   const emits = defineEmits(["update:modelValue"]);
   const props = defineProps(["modelValue", "props", "name", "label", "rules"]);
