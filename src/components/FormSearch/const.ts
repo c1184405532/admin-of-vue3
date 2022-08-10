@@ -102,7 +102,7 @@ const formList = [
       // picker: "quarter",
       //picker: "year",
       placeholder: "请选择日期",
-      showTime: { format: "HH:mm:ss" }
+      // showTime: { format: "HH:mm:ss" }
     }
   }
   ,
@@ -110,11 +110,12 @@ const formList = [
     key: "dateRange",
     type: "date-range-picker",
     label: "选择日期",
-    defaultValue: ["2022-07-14:2022-29周", "2022-08-09:2022-33周"],
+    defaultValue: [],
     options: cityOptions,
     props: {
       // picker: "quarter",
-      picker: "week",
+      // picker: "week",
+      showTime: { format: "HH:mm:ss" },
       placeholder: ["开始日期", "结束日期"]
     }
   }

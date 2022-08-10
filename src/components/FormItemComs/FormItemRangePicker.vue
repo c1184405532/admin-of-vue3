@@ -27,7 +27,7 @@
 
   const dateValue = ref(props.modelValue);
   const dateFormat = ref();
-  const dateValueFormat = ref("YYYY-MM-DD");
+  const dateValueFormat = ref();
 
   onBeforeMount(() => {
     setDateFormat();
@@ -65,11 +65,12 @@
       "week": "YYYY-MM-DD:YYYY-ww[周]"
     }
 
-    // todo 设置默认选项
+    const showTimeFormat = dateProps?.showTime?.format;
+    const dateDefaultFormat = `YYYY-MM-DD${showTimeFormat ? ` ${showTimeFormat}` : ""}`; // 未设置picker 默认选择日期时
 
     // 如需自定义值的格式请自行更改 formatValueMap 或者直接在props.props中定义 {valueFormat: "YYYY-MM-DD" or your format}
-    dateFormat.value = formatMap[dateProps.picker];
-    dateValueFormat.value = formatValueMap[dateProps.picker];
+    dateFormat.value = formatMap[dateProps.picker] || dateDefaultFormat;
+    dateValueFormat.value = formatValueMap[dateProps.picker] || dateDefaultFormat;
   }
 </script>
 

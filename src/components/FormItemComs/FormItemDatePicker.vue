@@ -27,7 +27,7 @@
 
   const dateValue = ref(props.modelValue);
   const dateFormat = ref();
-  const dateValueFormat = ref("YYYY-MM-DD");
+  const dateValueFormat = ref();
 
   onBeforeMount(() => {
     setDateFormat();
