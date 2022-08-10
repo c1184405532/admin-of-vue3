@@ -3,11 +3,11 @@ interface FormListRowType {
   key: string, // 数据键名
   type: string, // 组件类型
   label: string,
-  span?: number, // 当前表单一行占多少列（span/24）
   defaultValue?: string | number | boolean | string[],
   rules?: [], // 校验规则
   options?: Array<AnyPropName>, // 选择框数据 
   props?: object // 实际内容组件的props集合 如 a-input -> placeholeder; 详细信息请前往独立组件中的提示进行查看
+
 }
 
 interface AnyPropName {
@@ -121,16 +121,8 @@ const formList = [
   }
 ]
 
-// 默认值为引用类型的, 需要包装一个函数 return 出去 key: () => [0, 0] | {};
-const defaultProps = {
-  expand: false,
-  showItemNum: 5,
-  colSpan: 8
-}
-
 export {
-  formList,
-  defaultProps
+  formList
 }
 
 export type { FormListRowType, AnyPropName }

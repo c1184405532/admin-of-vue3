@@ -7,67 +7,18 @@
       @finish="onFinish"
     >
       <a-row :gutter="24">
-        <template v-for="(item, i) in formList" :key="item.key">
-          <a-col :span="8" v-show="expand || i <= 6">
+        <template v-for="(item, i) in data" :key="item.key">
+          <a-col v-show="expand || i < showItemNum" :span="item.span || colSpan">
             <component 
               :is="ComponentMap[item.type]" 
               v-model="formState[item.key]" 
               v-bind="item"
               :name="item.key"
             />
-
-            <!-- <FormItemInput
-              v-if="item.type === `input`"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            />
-            <FormItemInputNumber
-              v-if="item.type === `input-number`"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            />
-            <FormItemTextArea
-              v-if="item.type === `textarea`"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            />
-            <FormItemSelect
-              v-if="item.type === `select`"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            />
-            <FormItemTreeSelect
-              v-if="item.type === `tree-select`"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            />
-            <FormItemDatePicker
-              v-if="item.type === `date-picker`"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            /> -->
           </a-col>
-
         </template>
-
-        <!-- <template v-for="i in 10" :key="i">
-          <a-col v-show="expand || i <= 6" :span="8">
-            <a-form-item
-              :name="`field-${i}`"
-              :label="`field-${i}`"
-              :rules="[{ required: true, message: 'input something' }]"
-            >
-              <a-input v-model:value="formState[`field-${i}`]" placeholder="placeholder"></a-input>
-            </a-form-item>
-          </a-col>
-        </template> -->
       </a-row>
+
       <a-row>
         <a-col :span="24" style="text-align: right">
           <a-button type="primary" html-type="submit">查询</a-button>
@@ -79,7 +30,7 @@
             <template v-else>
               <DownOutlined />
             </template>
-            Collapse
+            {{ expand ? "折叠" : "展开" }}
           </a>
         </a-col>
       </a-row>
@@ -87,21 +38,34 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, watch, onBeforeMount } from "vue";
+  import { reactive, ref, watch, onBeforeMount, toRefs } from "vue";
   import type { FormInstance } from "ant-design-vue";
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
-  import { formList as FormList, FormListRowType, AnyPropName } from "./const";
-  import ComponentMap from "@/components/FormItemComs";
+  import { FormListRowType, AnyPropName, defaultProps } from "./const";
+  import ComponentMap from "@components/FormItemComs";
 
-  const expand = ref(false);
+  
+  interface PropsType {
+    data: Array<FormListRowType>, // 表单数据源
+    expand?: boolean, // 是否展开所有项
+    showItemNum?: number, // 显示表单项个数, 超过折叠
+    colSpan?: number // 表单一行占多少列
+  }
+
+  const props = withDefaults(defineProps<PropsType>(), {...defaultProps});
+  const { data, expand, showItemNum } = toRefs(props);
+
+  const emits = defineEmits(["onChange"])
+
   const formRef = ref<FormInstance>();
   const formState = reactive<AnyPropName>({});
-  const formList = reactive<Array<FormListRowType>>(FormList);
 
-  watch(formState, (ov, nv) => {
-    console.log("ov", ov);
-    console.log("nv", nv);
+  console.log("props data", data.value);
+  
+  watch(formState, value => {
+    // todo value = formstate  need formState[change key]
+    emits("onChange", value);
   })
 
   onBeforeMount(() => {
@@ -114,7 +78,7 @@
   };
 
   const setDefaultFormState = () => {
-    formList.forEach(v => {
+    data.value.forEach(v => {
       formState[v.key] = v.defaultValue;
     }) 
   }
