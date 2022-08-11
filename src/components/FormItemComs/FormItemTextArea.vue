@@ -17,13 +17,14 @@
 
   import { ref, watch } from "vue";
   
-  const emits = defineEmits(["update:modelValue"]);
+  const emits = defineEmits(["update:modelValue", "change"]);
   const props = defineProps(["modelValue", "props", "name", "label", "rules"]);
 
   const inputValue = ref(props.modelValue);
 
   watch(inputValue, (newv) => {
     emits("update:modelValue", newv);
+    // emits("change",newv, props.name)
   })
 
   watch(() => props.modelValue, (newv) => {

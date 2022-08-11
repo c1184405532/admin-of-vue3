@@ -16,14 +16,33 @@
   // props.props 详细参数请查阅官方文档 https://antdv.com/components/input-cn/#API
 
   import { ref, watch } from "vue";
+
+  import { formItemDefaultProps } from "./const";
+
+  // vue3 当前版本暂不支持外部导入props类型定义 wait fix
+  interface FormItemPropsType {
+    modelValue: any, // v-model响应值
+    name: string, // 数据键
+    label: string, // 表单项文本名
+    rules?: [Record<string, unknown>], // 校验规则 同antd 表单校验规则一致
+    change?: (value: any, key: string) => void, // 当前项值变化时触发
+    props?: object, // 组件额外 props 同antd组件props一致
+  }
   
-  const emits = defineEmits(["update:modelValue"]);
-  const props = defineProps(["modelValue", "props", "name", "label", "rules"]);
+  const emits = defineEmits(["update:modelValue", "change"]);
+  const props = withDefaults(defineProps<FormItemPropsType>(), {...formItemDefaultProps});
 
   const inputValue = ref(props.modelValue);
 
   watch(inputValue, (newv) => {
+    const { change, name } = props;
+
     emits("update:modelValue", newv);
+    emits("change", newv, name)
+    console.log(`(typeof change).indexOf("function")`, (typeof change).indexOf("function"));
+    
+    if ((typeof change).indexOf("function") !== -1) change(newv, name);
+
   })
 
   watch(() => props.modelValue, (newv) => {

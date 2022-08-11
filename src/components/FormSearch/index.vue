@@ -9,9 +9,10 @@
       <a-row :gutter="24">
         <template v-for="(item, i) in data" :key="item.key">
           <a-col v-show="expand || i < showItemNum" :span="item.span || colSpan">
-            <component 
-              :is="ComponentMap[item.type]" 
-              v-model="formState[item.key]" 
+            <component
+              @change="onChange"
+              :is="ComponentMap[item.type]"
+              v-model="formState[item.key]"
               v-bind="item"
               :name="item.key"
             />
@@ -56,26 +57,34 @@
   const props = withDefaults(defineProps<PropsType>(), {...defaultProps});
   const { data, expand, showItemNum } = toRefs(props);
 
-  const emits = defineEmits(["onChange"])
+  const emits = defineEmits(["change"])
 
   const formRef = ref<FormInstance>();
   const formState = reactive<AnyPropName>({});
 
   console.log("props data", data.value);
   
-  watch(formState, value => {
-    // todo value = formstate  need formState[change key]
-    emits("onChange", value);
-  })
+  // watch(formState, (value, prev) => {
+  //   // todo value = formstate  need formState[change key]
+  //   // console.log(value);
+  //   // console.log(prev);
+  // })
 
   onBeforeMount(() => {
     setDefaultFormState();
   })
+  
 
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
     console.log("formState: ", formState);
   };
+
+  const onChange = (value: any, key: string) => {
+    // console.log("onChange", value, key);
+    // InputNumber 组件未监听事件时,当输入值,并失去焦点时会进入当前回调,且回调参数 value 为虚拟dom结构,未知bug; 此处判断key进行事件发送
+    if (key) emits("change", value, key);
+  }
 
   const setDefaultFormState = () => {
     data.value.forEach(v => {
