@@ -14,20 +14,36 @@
 <script lang="ts" setup>
 
   // props.props 详细参数请查阅官方文档（TextArea） https://antdv.com/components/input-cn/#API
-
   import { ref, watch } from "vue";
+
+  import { useChange } from "./useFormItem";
+  import { formItemDefaultProps } from "./const";
+
+  interface FormItemEmits {
+    (e: "update:modelValue", value: any): void,
+    (e: "onChange", value: any, key: string): void,
+  }
+
+  // vue3 当前版本暂不支持外部导入props类型定义 wait fix
+  interface FormItemProps {
+    modelValue: any, // v-model响应值
+    name: string, // 数据键
+    label: string, // 表单项文本名
+    rules?: [Record<string, unknown>], // 校验规则 同antd 表单校验规则一致
+    props?: object, // 组件额外 props 同antd组件props一致
+    change?: (value: any, key: string) => void, // 当前项值变化时触发
+  }
   
-  const emits = defineEmits(["update:modelValue", "change"]);
-  const props = defineProps(["modelValue", "props", "name", "label", "rules"]);
+  const emits = defineEmits<FormItemEmits>();
+  const props = withDefaults(defineProps<FormItemProps>(), {...formItemDefaultProps});
 
   const inputValue = ref(props.modelValue);
 
-  watch(inputValue, (newv) => {
-    emits("update:modelValue", newv);
-    // emits("change",newv, props.name)
+  watch(inputValue, value => {
+    useChange(emits, props, value);
   })
 
-  watch(() => props.modelValue, (newv) => {
-    inputValue.value = newv;
+  watch(() => props.modelValue, value => {
+    inputValue.value = value;
   })
 </script>

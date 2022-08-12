@@ -6,8 +6,9 @@ interface FormItemProps {
   name: string, // 数据键
   label: string, // 表单项文本名
   rules?: [Record<string, unknown>], // 校验规则 同antd 表单校验规则一致
-  change?: (value: any, key: string) => void, // 当前项值变化时触发
+  options?: Array<AnyPropName>, // 配置项数据 如 select 列表数据 tree-select 树下拉数据
   props?: object, // 组件额外 props 同antd组件props一致
+  change?: (value: any, key: string) => void, // 当前项值变化时触发
 }
 
 // const emits = difineEmits<FormItemEmits>(); FormItemEmits 暂时不支持外部导入使用; 当你修改这里时,还需要进入实际单文件组件进行修改如FormItemInput组件
@@ -22,7 +23,7 @@ interface FormListRowType {
   label: string,
   span?: number, // 当前表单一行占多少列（span/24）
   defaultValue?: string | number | boolean | string[],
-  rules?: [], // 校验规则
+  rules?: [Record<string, unknown>], // 校验规则
   options?: Array<AnyPropName>, // 选择框数据 
   props?: object // 实际内容组件的props集合同antd props 一致; 如 a-input -> placeholeder; 详细信息请前往独立组件中的提示进行查看
 }
