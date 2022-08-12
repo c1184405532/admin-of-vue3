@@ -28,7 +28,9 @@ module.exports = {
 			"ignores": ["index"]
 		}],
 		"@typescript-eslint/no-var-requires": "off", // 关闭使用require导入文件提示错误，如果是ts版本还需安装 @types/node 依赖包
-		"@typescript-eslint/no-explicit-any": "off"
+		"@typescript-eslint/no-explicit-any": "off", // 关闭不能使用any类型
+		"@typescript-eslint/no-non-null-assertion": "off", // 关闭不能使用非空断言
+
 		// "object-curly-spacing": ["error", "always"]
 		// "space-before-function-paren": ["error", "never"],
     // "no-mixed-spaces-and-tabs": "on",

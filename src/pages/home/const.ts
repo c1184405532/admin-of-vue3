@@ -42,6 +42,7 @@ const formList = [
     type: "input",
     label: "用户名",
     defaultValue: "",
+    // change: (v: any) => { console.log("vvv", v)},
     props: {
       placeholder: "请输入姓名"
     }

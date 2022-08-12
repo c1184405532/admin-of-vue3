@@ -10,7 +10,7 @@
         <template v-for="(item, i) in data" :key="item.key">
           <a-col v-show="expand || i < showItemNum" :span="item.span || colSpan">
             <component
-              @change="onChange"
+              @onChange="onChange"
               :is="ComponentMap[item.type]"
               v-model="formState[item.key]"
               v-bind="item"
@@ -43,9 +43,10 @@
   import type { FormInstance } from "ant-design-vue";
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
-  import { FormListRowType, AnyPropName, defaultProps } from "./const";
-  import ComponentMap from "@components/FormItemComs";
+  import type { AnyPropName, FormListRowType } from "@types";
 
+  import { defaultProps } from "./const";
+  import ComponentMap from "@components/FormItemComs";
   
   interface PropsType {
     data: Array<FormListRowType>, // 表单数据源
@@ -54,10 +55,14 @@
     colSpan?: number // 表单一行占多少列
   }
 
+  interface FormSearchEmits {
+    (e: "change", value: any, key: string): void,
+  }
+
   const props = withDefaults(defineProps<PropsType>(), {...defaultProps});
   const { data, expand, showItemNum } = toRefs(props);
-
-  const emits = defineEmits(["change"])
+  
+  const emits = defineEmits<FormSearchEmits>();
 
   const formRef = ref<FormInstance>();
   const formState = reactive<AnyPropName>({});
@@ -66,24 +71,23 @@
   
   // watch(formState, (value, prev) => {
   //   // todo value = formstate  need formState[change key]
-  //   // console.log(value);
-  //   // console.log(prev);
+  //   console.log(value);
+  //   console.log(prev);
   // })
 
   onBeforeMount(() => {
     setDefaultFormState();
   })
   
-
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
     console.log("formState: ", formState);
   };
 
-  const onChange = (value: any, key: string) => {
-    // console.log("onChange", value, key);
-    // InputNumber 组件未监听事件时,当输入值,并失去焦点时会进入当前回调,且回调参数 value 为虚拟dom结构,未知bug; 此处判断key进行事件发送
-    if (key) emits("change", value, key);
+  // 对 component 使用 onChange 的原因是组件本身有change事件这里不进行混合; 并且change参数类型也不相同会提示报错
+  const onChange = (value: any, key: string): void => {
+    console.log("onChange", value, key);
+    emits("change", value, key);
   }
 
   const setDefaultFormState = () => {

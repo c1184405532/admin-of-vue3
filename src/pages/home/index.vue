@@ -9,7 +9,7 @@
   import { formList } from "./const";
   
   const formChange = (value: any, key: string) => {
-    console.log(value);
-    console.log("key", key);
+    // console.log(value);
+    // console.log("key", key);
   }
 </script>
