@@ -3,7 +3,8 @@
 const defaultProps = {
   expand: false,
   showItemNum: 6,
-  colSpan: 8 // n / 24
+  colSpan: 8, // n / 24
+  labelCol: () => ({ span: 4, offset: 0 })
 }
 
 export { defaultProps };
