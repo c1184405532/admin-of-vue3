@@ -8,7 +8,7 @@
     >
       <a-row :gutter="24">
         <template v-for="(item, i) in data" :key="item.key">
-          <a-col v-show="expand || i < showItemNum" :span="item.span || colSpan">
+          <a-col v-show="_expand || i < showItemNum" :span="item.span || colSpan">
             <component
               @onChange="onChange"
               :is="ComponentMap[item.type]"
@@ -24,14 +24,14 @@
         <a-col :span="24" style="text-align: right">
           <a-button type="primary" html-type="submit">查询</a-button>
           <a-button style="margin: 0 8px" @click="() => formRef?.resetFields()">重置</a-button>
-          <a style="font-size: 12px" @click="expand = !expand">
-            <template v-if="expand">
+          <a style="font-size: 12px" @click="_expand = !_expand">
+            <template v-if="_expand">
               <UpOutlined />
             </template>
             <template v-else>
               <DownOutlined />
             </template>
-            {{ expand ? "折叠" : "展开" }}
+            {{ _expand ? "折叠" : "展开" }}
           </a>
         </a-col>
       </a-row>
@@ -50,7 +50,7 @@
   
   interface PropsType {
     data: Array<FormListRowType>, // 表单数据源
-    expand?: boolean, // 是否展开所有项
+    expand?: boolean, // 默认是否展开所有项
     showItemNum?: number, // 显示表单项个数, 超过折叠
     colSpan?: number // 表单一行占多少列
   }
@@ -66,6 +66,8 @@
 
   const formRef = ref<FormInstance>();
   const formState = reactive<AnyPropName>({});
+
+  const _expand = ref(expand.value);
 
   console.log("props data", data.value);
   

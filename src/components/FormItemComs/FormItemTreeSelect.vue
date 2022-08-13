@@ -16,20 +16,40 @@
 <script lang="ts" setup>
 
   // props.props 详细参数请查阅官方文档 https://antdv.com/components/tree-select-cn#API
-
   import { ref, watch } from "vue";
+
+  import type { AnyPropName }  from "@types";
+
+  import { useChange } from "./useFormItem";
+  import { formItemDefaultProps } from "./const";
+
+  interface FormItemEmits {
+    (e: "update:modelValue", value: any): void,
+    (e: "onChange", value: any, key: string): void,
+  }
+
+  // vue3 当前版本暂不支持外部导入props类型定义 wait fix
+  interface FormItemProps {
+    modelValue: any, // v-model响应值
+    name: string, // 数据键
+    label: string, // 表单项文本名
+    rules?: [Record<string, unknown>], // 校验规则 同antd 表单校验规则一致
+    options?: Array<AnyPropName>, // 配置项数据 如 select 列表数据 tree-select 树下拉数据
+    props?: AnyPropName, // 组件额外 props 同antd组件props一致
+    change?: (value: any, key: string) => void, // 当前项值变化时触发
+  }
   
-  const emits = defineEmits(["update:modelValue"]);
-  const props = defineProps(["modelValue", "props", "name", "label", "rules", "options"]);
+  const emits = defineEmits<FormItemEmits>();
+  const props = withDefaults(defineProps<FormItemProps>(), {...formItemDefaultProps});
 
   const selectValue = ref(props.modelValue);
 
-  watch(selectValue, (newv) => {
-    emits("update:modelValue", newv);
+  watch(selectValue, value => {
+    useChange(emits, props, value);
   })
 
-  watch(() => props.modelValue, (newv) => {
-    selectValue.value = newv;
+  watch(() => props.modelValue, value => {
+    selectValue.value = value;
   })
 
   // 如果是自定义options结构，此处搜索会失效，需要添加额外逻辑

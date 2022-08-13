@@ -102,7 +102,7 @@ const formList = [
     options: cityOptions,
     props: {
       // picker: "quarter",
-      //picker: "year",
+      // picker: "year",
       placeholder: "请选择日期",
       // showTime: { format: "HH:mm:ss" }
     }

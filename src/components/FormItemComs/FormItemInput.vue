@@ -15,9 +15,12 @@
 
   // props.props 详细参数请查阅官方文档 https://antdv.com/components/input-cn/#API
   import { ref, watch } from "vue";
+
+  import { AnyPropName } from "@/types";
+
   import { useChange } from "./useFormItem";
   import { formItemDefaultProps } from "./const";
-
+  
   interface FormItemEmits {
     (e: "update:modelValue", value: any): void,
     (e: "onChange", value: any, key: string): void,
@@ -29,7 +32,7 @@
     name: string, // 数据键
     label: string, // 表单项文本名
     rules?: [Record<string, unknown>], // 校验规则 同antd 表单校验规则一致
-    props?: object, // 组件额外 props 同antd组件props一致
+    props?: AnyPropName, // 组件额外 props 同antd组件props一致
     change?: (value: any, key: string) => void, // 当前项值变化时触发
   }
   
