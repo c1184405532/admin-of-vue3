@@ -33,7 +33,7 @@
     modelValue: any, // v-model响应值
     name: string, // 数据键
     label: string, // 表单项文本名
-    rules?: [Record<string, unknown>], // 校验规则 同antd 表单校验规则一致
+    rules?: Array<AnyPropName>, // 校验规则 同antd 表单校验规则一致
     options?: Array<AnyPropName>, // 配置项数据 如 select 列表数据 tree-select 树下拉数据
     props?: AnyPropName, // 组件额外 props 同antd组件props一致
     change?: (value: any, key: string) => void, // 当前项值变化时触发

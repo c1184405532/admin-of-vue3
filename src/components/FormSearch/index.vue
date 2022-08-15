@@ -1,4 +1,5 @@
 <template>
+  <a-spin :spinning="loading" :tip="loadingTip" :delay="delayTime">
     <a-form
       ref="formRef"
       name="advanced_search"
@@ -10,13 +11,15 @@
       <a-row :gutter="24">
         <template v-for="(item, i) in data" :key="item.key">
           <a-col v-show="_expand || i < showItemNum" :span="item.span || colSpan">
-            <component
-              @onChange="onChange"
-              :is="ComponentMap[item.type]"
-              v-model="formState[item.key]"
-              v-bind="item"
-              :name="item.key"
-            />
+            <a-tooltip :title="item.tip" :mouseEnterDelay="0.2">
+              <component
+                @onChange="onChange"
+                :is="ComponentMap[item.type]"
+                v-model="formState[item.key]"
+                v-bind="item"
+                :name="item.key"
+              />
+            </a-tooltip>
           </a-col>
         </template>
       </a-row>
@@ -37,10 +40,11 @@
         </a-col>
       </a-row>
     </a-form>
+  </a-spin>
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, watch, onBeforeMount, toRefs, nextTick } from "vue";
+  import { reactive, ref, onBeforeMount, toRefs, nextTick } from "vue";
   import type { FormInstance } from "ant-design-vue";
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
@@ -51,6 +55,9 @@
   
   interface PropsType {
     data: Array<FormListRowType>, // 表单数据源
+    loading?: boolean, // 是否加载中
+    loadingTip?: string, // 自定义加载提示文案
+    delayTime?: number, // 延迟显示loading状态, 当loading状态在 delayTime 时间内结束, 则不显示loding UI状态 单位ms
     expand?: boolean, // 默认是否展开所有项
     showItemNum?: number, // 显示表单项个数, 超过折叠
     colSpan?: number // 表单项一行占多少列 n/24
@@ -59,31 +66,25 @@
 
   interface FormSearchEmits {
     (e: "change", value: any, key: string): void,
+    (e: "search", values: any): void,
   }
 
   const emits = defineEmits<FormSearchEmits>();
 
   const props = withDefaults(defineProps<PropsType>(), {...defaultProps});
-  const { data, expand, labelCol, showItemNum } = toRefs(props);
+  const { data, loading, loadingTip, delayTime, expand, labelCol, showItemNum } = toRefs(props);
   
   
   const formRef = ref<FormInstance>();
   let formState = reactive<AnyPropName>({});
   const _expand = ref(expand?.value);
 
-  // watch(formState, (value, prev) => {
-  //   // todo value = formstate  need formState[change key]
-  //   console.log(value);
-  //   console.log(prev);
-  // })
-
   onBeforeMount(() => {
     setDefaultFormState();
   })
   
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-    console.log("formState: ", formState);
+    emits("search", values);
   };
 
   // 对 component 使用 onChange 的原因是组件本身有change事件这里不进行混合; 并且change参数类型也不相同会提示报错
@@ -105,12 +106,42 @@
     });
   }
 
-  // todo set states getstates getstate(key)
+  const getFormState = (payload?: string | string[]): string | object => {
+    const type = payload ? typeof payload : "not";
 
-  const getFormState = () => ({ ...formState });
+    if (type === "not") return { ...formState };
 
-  const setFormState = (key: string, value: any) => {
-    formState[key] = value;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (type === "string") return formState[payload];
+
+    if (Array.isArray(payload)) {
+      const ret: AnyPropName = {};
+      payload.forEach(key => {
+        ret[key] = formState[key]
+      });
+      return ret;
+    }
+    console.error(`传入参数类型需为 string | string[]; 当前参数${JSON.stringify(payload)}`);
+    return {};
+  };
+
+  const setFormState = (key: string | AnyPropName, value: any) => {
+    const type = key ? typeof key : "not";
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (type === "string") formState[key] = value;
+    else if (!Array.isArray(key) && type === "object") {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      for (const name in key) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        formState[name] = key[name];
+      }
+    } else {
+      console.error(`传入参数类型需为 string | object<{key: value}>; 当前参数${JSON.stringify(key)}`);
+    }
   }
 
   defineExpose({ getFormState, setFormState });

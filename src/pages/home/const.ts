@@ -4,7 +4,7 @@ interface FormListRowType {
   type: string, // 组件类型
   label: string,
   defaultValue?: string | number | boolean | string[],
-  rules?: [], // 校验规则
+  rules?: Array<AnyPropName>, // 校验规则
   options?: Array<AnyPropName>, // 选择框数据 
   props?: object // 实际内容组件的props集合 如 a-input -> placeholeder; 详细信息请前往独立组件中的提示进行查看
 
@@ -42,7 +42,7 @@ const formList = [
     type: "input",
     label: "用户名",
     defaultValue: "",
-    options: [{}],
+    rules: [{ required: true, message: "Please input your username" }],
     // change: (v: any) => { console.log("vvv", v)},
     props: {
       placeholder: "请输入姓名"
@@ -52,6 +52,7 @@ const formList = [
     key: "age",
     type: "input-number",
     label: "年龄",
+    tip: "年龄选择范围区间18-45",
     defaultValue: 20,
     props: {
       placeholder: "请输入年龄",
