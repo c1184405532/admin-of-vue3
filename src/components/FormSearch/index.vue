@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, onBeforeMount, toRefs, nextTick } from "vue";
+  import { reactive, ref, toRefs, nextTick } from "vue";
   import type { FormInstance } from "ant-design-vue";
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
@@ -74,29 +74,34 @@
   const props = withDefaults(defineProps<PropsType>(), {...defaultProps});
   const { data, loading, loadingTip, delayTime, expand, labelCol, showItemNum } = toRefs(props);
   
-  
+
   const formRef = ref<FormInstance>();
-  let formState = reactive<AnyPropName>({});
+  const formState = reactive<AnyPropName>({});
   const _expand = ref(expand?.value);
-
-  onBeforeMount(() => {
-    setDefaultFormState();
-  })
   
-  const onFinish = (values: any) => {
-    emits("search", values);
-  };
-
-  // 对 component 使用 onChange 的原因是组件本身有change事件这里不进行混合; 并且change参数类型也不相同会提示报错
-  const onChange = (value: any, key: string): void => {
-    // todo 检查输入值后 触发必填错误校验
-    emits("change", value, key);
-  }
 
   const setDefaultFormState = () => {
     data.value.forEach(v => {
       if (formState[v.key] !== v.defaultValue) formState[v.key] = v.defaultValue;      
     });
+  }
+  
+  setDefaultFormState();
+  
+  const onFinish = (values: any) => {
+    emits("search", values);
+  };
+
+  let timeoutValidate: any;
+  // 对 component 使用 onChange 的原因是组件本身有change事件这里不进行混合; 并且change参数类型也不相同会提示报错
+  const onChange = (value: any, key: string): void => {
+    emits("change", value, key);
+
+    // 当数据变化时手动触发校验, 因为嵌套v-model导致表单自动校验会出现错误响应 预期与实际不一致
+    clearTimeout(timeoutValidate);
+    timeoutValidate = setTimeout(() => {
+      formRef.value?.validateFields([key]);
+    }, 120)
   }
 
   // 重置表单后会触发n次 change 响应事件

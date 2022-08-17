@@ -43,7 +43,7 @@
   })
 
   const onSearch = async (formState: any) => {
-    console.log("formState", formState.dateRange[0]);
+    console.log("formState", formState);
     const res = await request.post("aa", {name: "陈"}, {show: true});
     console.log("res", res);
     

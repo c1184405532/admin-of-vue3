@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { notification } from "ant-design-vue";
 
 import type { RequestConfig } from "./types";
 import { BASE_URL, TIMEOUT, getToken } from "./config";
@@ -33,21 +34,28 @@ instance.interceptors.response.use(
   },
   err => {
     console.log("responseerr->", err);
-    const { response: { data, status }} = err;
+    const { response: { data, status }, message } = err;
     if (data.code === 401 || status === 401) {
       // todo 登陆过期或授权未通过
 
     } else {
       // todo 提示错误信息
 
-
-
-      // 防止使用 await xx接口抛错时无需加入 try catch。
-      // 例子： const res = await getTabelList(url, payload, config);
-      // if (res) 你的逻辑
-      // 如果返回reject 会使await之后的代码无法执行。
-      return undefined;
     }
+
+    // 项目中需要将当前错误提示进行逻辑化处理, 什么时候提示, 什么时候不提示;
+    notification.error({
+      message: "警告",
+      placement: "topRight",
+      description: `${data.message || message}`,
+      duration: 5
+    })
+
+    // 防止使用 await xx接口抛错时无需加入 try catch。
+    // 例子： const res = await getTabelList(url, payload, config);
+    // if (res) 你的逻辑
+    // 如果返回reject 会使await之后的代码无法执行。
+    return undefined;
   }
 )
 

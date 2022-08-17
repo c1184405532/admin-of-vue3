@@ -65,6 +65,7 @@ const formList = [
     type: "textarea",
     label: "描述信息",
     defaultValue: "",
+    rules: [{ required: true, message: "Please input your username" }],
     props: {
       placeholder: "请输入描述信息",
       autoSize: true
