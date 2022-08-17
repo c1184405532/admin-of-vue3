@@ -10,6 +10,8 @@
   import FormSearch from "@/components/FormSearch/index.vue";
   import { formList } from "./const";
 
+  import request from "@/request";
+
   const formRef = ref();
 
   const loading = ref(false);
@@ -40,8 +42,10 @@
     
   })
 
-  const onSearch = (formState: any) => {
+  const onSearch = async (formState: any) => {
     console.log("formState", formState.dateRange[0]);
+    const res = await request.post("aa", {name: "陈"}, {show: true});
+    console.log("res", res);
     
   }
 

@@ -89,6 +89,7 @@
 
   // 对 component 使用 onChange 的原因是组件本身有change事件这里不进行混合; 并且change参数类型也不相同会提示报错
   const onChange = (value: any, key: string): void => {
+    // todo 检查输入值后 触发必填错误校验
     emits("change", value, key);
   }
 
