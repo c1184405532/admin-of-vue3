@@ -124,9 +124,63 @@ const formList = [
     }
   }
 ]
+import type { TableColumnsType } from 'ant-design-vue';
+const columns: TableColumnsType = [
+  {
+    title: '车牌号',
+    width: 100,
+    key: "vehicleLicenseNo",
+    fixed: 'left',
+  },
+  {
+    title: '接车地点',
+    width: 300,
+    // dataIndex: 'age',
+    key: 'pickupAddr',
+    //fixed: 'left',
+  },
+  {
+    title: '维修店铺',
+    // dataIndex: 'address',
+    key: 'shopName',
+    width: 150,
+  },
+  {
+    title: 'Column 2',
+    //dataIndex: 'address',
+    key: 'address',
+    width: 150,
+  },
+  {
+    title: 'Column 3',
+    //dataIndex: 'address',
+    key: 'address',
+    width: 150,
+  },
+  {
+    title: 'Action',
+    key: 'operation',
+    fixed: 'right',
+    width: 100,
+  },
+];
+
+
+const data = [];
+
+for (let i = 0; i < 100; i++) {
+data.push({
+  key: i,
+  name: `Edrward ${i}`,
+  age: 32,
+  address: `London Park no. ${i}`,
+});
+}
 
 export {
-  formList
+  formList,
+  data,
+  columns
 }
 
 export type { FormListRowType, AnyPropName }
