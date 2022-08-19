@@ -6,7 +6,7 @@ interface RequestConfig extends AxiosRequestConfig {
 }
 
 interface RequestInstance {
-  post: (url: string, payload: AnyPropName, config: AnyPropName) => void
+  post: (url: string, payload: AnyPropName, config?: AnyPropName) => Promise<AnyPropName>
 }
 
 export type { RequestConfig, RequestInstance };

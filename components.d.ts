@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuDivider: typeof import('ant-design-vue/es')['MenuDivider']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    APopconfirm: typeof import('ant-design-vue/es')['Popconfirm']
     ARangePicker: typeof import('ant-design-vue/es')['RangePicker']
     ARate: typeof import('ant-design-vue/es')['Rate']
     ARow: typeof import('ant-design-vue/es')['Row']

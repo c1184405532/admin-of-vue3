@@ -38,11 +38,11 @@ const cityOptions = [
 
 const formList = [
   {
-    key: "userName",
+    key: "vehicleLicenseNo",
     type: "input",
-    label: "用户名",
+    label: "车牌号",
     defaultValue: "",
-    rules: [{ required: true, message: "Please input your username" }],
+    rules: [{ required: false, message: "" }],
     // change: (v: any) => { console.log("vvv", v)},
     props: {
       placeholder: "请输入姓名"
@@ -65,7 +65,7 @@ const formList = [
     type: "textarea",
     label: "描述信息",
     defaultValue: "",
-    rules: [{ required: true, message: "Please input your username" }],
+    rules: [{ required: false, message: "Please input your username" }],
     props: {
       placeholder: "请输入描述信息",
       autoSize: true
@@ -124,44 +124,50 @@ const formList = [
     }
   }
 ]
-import type { TableColumnsType } from 'ant-design-vue';
-const columns: TableColumnsType = [
+import type { BaseTableColumnsType } from "@types"
+const columns: BaseTableColumnsType = [
   {
-    title: '车牌号',
+    title: "车牌号",
     width: 100,
     key: "vehicleLicenseNo",
-    fixed: 'left',
+    fixed: "left",
   },
   {
-    title: '接车地点',
-    width: 300,
-    // dataIndex: 'age',
-    key: 'pickupAddr',
-    //fixed: 'left',
+    title: "接车地点",
+    // width: 300,
+    // dataIndex: "age",
+    key: "pickupAddr",
+    //fixed: "left",
   },
   {
-    title: '维修店铺',
-    // dataIndex: 'address',
-    key: 'shopName',
-    width: 150,
+    title: "维修店铺",
+    // dataIndex: "address",
+    key: "shopName",
+    // width: 150,
   },
   {
-    title: 'Column 2',
-    //dataIndex: 'address',
-    key: 'address',
-    width: 150,
+    title: "Column 2",
+    //dataIndex: "address",
+    key: "address",
+    // width: 150,
   },
   {
-    title: 'Column 3',
-    //dataIndex: 'address',
-    key: 'address',
-    width: 150,
+    title: "Column 3",
+    //dataIndex: "address",
+    key: "address",
+    // width: 150,
   },
   {
-    title: 'Action',
-    key: 'operation',
-    fixed: 'right',
-    width: 100,
+    title: "操作",
+    key: "operation",
+    fixed: "right",
+    // width: 100,
+    operations: [
+      { label: "查看", value: "view" },
+      { label: "编辑", value: "edit" },
+      // { label: "出单", value: "createOrder" },
+      { label: "删除", value: "delete" },
+    ]
   },
 ];
 
