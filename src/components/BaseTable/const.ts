@@ -1,3 +1,6 @@
+import type { PaginationProps } from "ant-design-vue";
+
+
 // 默认值为引用类型的, 需要包装一个函数 return 出去 key: () => [0, 0] | {};
 const baseTableDefaultProps = {
   scroll: () => ({ x: 1500 }),
@@ -10,4 +13,10 @@ const defaultOperations = [
   { label: "删除", value: "delete" }
 ]
 
-export { baseTableDefaultProps, defaultOperations };
+// 如需扩展额外默认参数请前往官网API https://www.antdv.com/components/pagination-cn/#API
+const defaultPagination: PaginationProps = {
+  showSizeChanger: true,
+  showTotal: (total: number) => `总数 ${total} 条`
+}
+
+export { baseTableDefaultProps, defaultOperations, defaultPagination };

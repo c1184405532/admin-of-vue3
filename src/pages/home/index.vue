@@ -3,24 +3,33 @@
   <FormSearch :data="formList" :loading="loading" @change="formChange" @search="onSearch" ref="formRef"/>
   <a-button @click="getState">获取数据</a-button>
   <BaseTable
-    :columns="refColumns"
+    :columns="tableColumns"
     :query="tableQueryParams"
-  />
+    :row-selection="{ selectedRowKeys: refSelectedRowKeys, onChange: onSelectChange }"
+    requestUrl="repairOrder/queryPage"
+  >
+    <template #address="{ record, column }">
+      <span > 动态slot record:{{ record.salesName }} column: {{ column }}</span>
+    </template>
+    <template #address2="{ record, column }">
+      <span > address1 record:{{ record.salesName }} column: {{ column.key }}</span>
+    </template>
+  </BaseTable>
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted } from "vue";
+  import { ref, onMounted, reactive } from "vue";
   import FormSearch from "@/components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
   import { formList, columns } from "./const";
-
+  
+  type Key = string | number;
 
   const formRef = ref();
-
   const loading = ref(false);
-  const refColumns = ref(columns);
-  const tableData = ref([]);
+  const tableColumns = reactive(columns);
   const tableQueryParams = ref({});
+  const refSelectedRowKeys = ref<Key[]>([])
 
   const formChange = (value: any, key: string) => {
     // console.log(value);
@@ -30,6 +39,11 @@
       
     }
   }
+  
+  const onSelectChange = (selectedRowKeys: Key[]) => {
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    refSelectedRowKeys.value = selectedRowKeys
+  };
 
   onMounted(() => {
     console.log("FormSearchRef", formRef.value.getFormState());
@@ -58,7 +72,7 @@
   }
 
   const getState = () => {
-    refColumns.value[2] = {
+    tableColumns[2] = {
       title: "Full Name",
       width: 100,
       // dataIndex: 'name',

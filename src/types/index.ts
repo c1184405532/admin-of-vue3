@@ -7,12 +7,11 @@ interface AnyPropName {
 }
 
 interface BaseTableColumnType extends TableColumnType {
-  operations?: {label: string, value: any}[]
+  operations?: {label: string, value: any}[],
+  type?: "slot" // 设置slot时, key 就是你的 slot name
 }
 
-interface BaseTableColumnsType {
-  [index: number]: BaseTableColumnType
-}
+type BaseTableColumnsType = BaseTableColumnType[]
 
 export type {
   FormListRowType,

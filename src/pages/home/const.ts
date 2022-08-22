@@ -116,6 +116,7 @@ const formList = [
     label: "选择日期",
     defaultValue: [],
     options: cityOptions,
+    aa: 1,
     props: {
       // picker: "quarter",
       // picker: "week",
@@ -149,13 +150,15 @@ const columns: BaseTableColumnsType = [
     title: "Column 2",
     //dataIndex: "address",
     key: "address",
+    type: "slot",
     // width: 150,
   },
   {
     title: "Column 3",
     //dataIndex: "address",
-    key: "address",
+    key: "address2",
     // width: 150,
+    type: "slot",
   },
   {
     title: "操作",
