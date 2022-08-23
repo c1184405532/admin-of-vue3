@@ -2,7 +2,7 @@ const BASE_URL = "https://meas.fbpic.cn/";
 const TIMEOUT = 3000;
 
 const getToken = () => {
-  return "263aab178a4f0a885115d80f26d0dd46" // 设置你的项目中获取token逻辑
+  return "608eee6c595fc1fa128a135de1e5dd28" // 设置你的项目中获取token逻辑
 }
 
 export {

@@ -5,6 +5,7 @@
   <BaseTable
     :columns="tableColumns"
     :query="tableQueryParams"
+    :header-btns="tableHeaderBtns"
     :row-selection="{ selectedRowKeys: refSelectedRowKeys, onChange: onSelectChange }"
     requestUrl="repairOrder/queryPage"
   >
@@ -21,7 +22,7 @@
   import { ref, onMounted, reactive } from "vue";
   import FormSearch from "@/components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
-  import { formList, columns } from "./const";
+  import { formList, columns, tableHeaderBtns } from "./const";
   
   type Key = string | number;
 

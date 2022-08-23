@@ -174,6 +174,12 @@ const columns: BaseTableColumnsType = [
   },
 ];
 
+import type { HeaderBtnsType } from "@components/BaseTable/types";
+
+const tableHeaderBtns: HeaderBtnsType = [
+  { label: "新增", value: "add", type: "primary" },
+  { label: "导出文件", value: "export", type: "default", danger: true },
+]
 
 const data = [];
 
@@ -189,7 +195,8 @@ data.push({
 export {
   formList,
   data,
-  columns
+  columns,
+  tableHeaderBtns
 }
 
 export type { FormListRowType, AnyPropName }

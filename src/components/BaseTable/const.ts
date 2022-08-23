@@ -1,5 +1,5 @@
 import type { PaginationProps } from "ant-design-vue";
-
+import type { HeaderBtnsType } from "./types";
 
 // 默认值为引用类型的, 需要包装一个函数 return 出去 key: () => [0, 0] | {};
 const baseTableDefaultProps = {
@@ -19,4 +19,8 @@ const defaultPagination: PaginationProps = {
   showTotal: (total: number) => `总数 ${total} 条`
 }
 
-export { baseTableDefaultProps, defaultOperations, defaultPagination };
+const defaultHeaderBtns = {
+  btns: (): HeaderBtnsType => ([{ label: "新增", value: "add", type: "primary" }])
+} 
+
+export { baseTableDefaultProps, defaultOperations, defaultPagination, defaultHeaderBtns };

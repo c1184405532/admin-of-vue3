@@ -1,4 +1,5 @@
 <template>
+  <HeaderBtns :btns="props.headerBtns" @click="btn => handClick(btn.value, btn)"/>
   <a-table
     sticky
     :row-key="(record: any) => record.id || record.uid"
@@ -73,9 +74,11 @@
   import { ref, watch, toRefs, onBeforeMount, watchEffect, computed } from "vue";
 
   import { DownOutlined } from "@ant-design/icons-vue";
+  import HeaderBtns from "./HeaderBtns.vue";
 
   import type { TableProps, PaginationProps } from "ant-design-vue";
   import type { AnyPropName, BaseTableColumnsType } from "@types";
+  import type { HeaderBtnsType } from "./types";
 
   import { baseTableDefaultProps, defaultOperations, defaultPagination } from "./const";
 
@@ -88,8 +91,9 @@
     columns: BaseTableColumnsType, // 列头数据,
     requestUrl: string, // 请求地址
     query: AnyPropName, // 请求参数
+    headerBtns?: HeaderBtnsType,
     confirmTitle?: string, // 点击删除按钮 弹窗标题
-    rowSelection?: TableProps["rowSelection"],
+    rowSelection?: TableProps["rowSelection"], // 选择栏
     scroll?: { x?: string | number | true , y?: string | number, scrollToFirstRowOnChange?: boolean}, // 表格是否可滚动，也可以指定滚动区域的宽、高，
   }
   

@@ -53,6 +53,7 @@ declare module '@vue/runtime-core' {
     FormItemTreeSelect: typeof import('./src/components/FormItemComs/FormItemTreeSelect.vue')['default']
     FormSearch: typeof import('./src/components/FormSearch/index.vue')['default']
     HeaderBar: typeof import('./src/components/Layout/HeaderBar.vue')['default']
+    HeaderBtns: typeof import('./src/components/BaseTable/HeaderBtns.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     RenderRouterView: typeof import('./src/components/RenderRouterView/index.vue')['default']
