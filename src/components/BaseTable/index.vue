@@ -64,8 +64,7 @@
   import HeaderBtns from "./HeaderBtns.vue";
 
   import type { TableProps, PaginationProps } from "ant-design-vue";
-  import type { AnyPropName, BaseTableColumnsType } from "@types";
-  import type { HeaderBtnsType } from "./";
+  import type { AnyPropName, BaseTableColumnsType, HeaderBtnsType } from "@types";
 
   import { baseTableDefaultProps, defaultOperations, defaultPagination } from "./const";
 
