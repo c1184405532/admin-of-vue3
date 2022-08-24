@@ -1,19 +1,17 @@
 <template>
-  <a-layout style="min-height: 100vh">
+  <a-layout class="admin-layout">
     <SiderBar />
 
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0" >
+      <a-layout-header>
         <HeaderBar/>
       </a-layout-header>
 
-      <a-layout-content style="margin: 0 16px">
+      <a-layout-content>
         <router-view></router-view>
       </a-layout-content>
 
-      <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
-      </a-layout-footer>
+      <a-layout-footer>creator to chenyuting</a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -38,3 +36,30 @@ export default defineComponent({
 
 </script>
 
+<style lang="less">
+  .admin-layout{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    .ant-layout-header{
+      flex-shrink: 0;
+      background: #fff;
+      padding: 0;
+      box-shadow: 0 0.3px 4px rgb(0 21 41 / 8%);
+    }
+    .ant-layout-content{
+      padding:  0 16px;
+      flex: 1;
+      overflow: auto;
+      // min-width: 1600px;
+    }
+    .ant-layout-footer{
+      padding: 12px 0;
+      text-align: center;
+    }
+  }
+  .admin-layout section{
+    overflow: auto;
+  }
+</style>

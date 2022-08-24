@@ -1,4 +1,3 @@
-
 import type { ButtonProps } from "ant-design-vue";
 
 interface HeaderBtnType extends ButtonProps {
@@ -8,4 +7,10 @@ interface HeaderBtnType extends ButtonProps {
 
 type HeaderBtnsType = HeaderBtnType[];
 
-export type { HeaderBtnType, HeaderBtnsType }
+type SizeType = "small" | "middle" | "large" | undefined;
+
+interface TableRef {
+  getTableList: () => void
+}
+
+export type { HeaderBtnType, HeaderBtnsType, SizeType, TableRef }

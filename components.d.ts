@@ -7,8 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
-    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     ACol: typeof import('ant-design-vue/es')['Col']
@@ -30,16 +28,11 @@ declare module '@vue/runtime-core' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     APopconfirm: typeof import('ant-design-vue/es')['Popconfirm']
     ARangePicker: typeof import('ant-design-vue/es')['RangePicker']
-    ARate: typeof import('ant-design-vue/es')['Rate']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASelect: typeof import('ant-design-vue/es')['Select']
     ASpin: typeof import('ant-design-vue/es')['Spin']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
-    ASwitch: typeof import('ant-design-vue/es')['Switch']
     ATable: typeof import('ant-design-vue/es')['Table']
-    ATableSummary: typeof import('ant-design-vue/es')['TableSummary']
-    ATableSummaryCell: typeof import('ant-design-vue/es')['TableSummaryCell']
-    ATableSummaryRow: typeof import('ant-design-vue/es')['TableSummaryRow']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
     ATooltip: typeof import('ant-design-vue/es')['Tooltip']
     ATreeSelect: typeof import('ant-design-vue/es')['TreeSelect']
@@ -54,7 +47,6 @@ declare module '@vue/runtime-core' {
     FormSearch: typeof import('./src/components/FormSearch/index.vue')['default']
     HeaderBar: typeof import('./src/components/Layout/HeaderBar.vue')['default']
     HeaderBtns: typeof import('./src/components/BaseTable/HeaderBtns.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     RenderRouterView: typeof import('./src/components/RenderRouterView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

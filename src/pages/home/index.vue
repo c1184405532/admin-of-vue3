@@ -3,14 +3,16 @@
   <FormSearch :data="formList" :loading="loading" @change="formChange" @search="onSearch" ref="formRef"/>
   <a-button @click="getState">获取数据</a-button>
   <BaseTable
+    @click="tableClick"
     :columns="tableColumns"
     :query="tableQueryParams"
     :header-btns="tableHeaderBtns"
     :row-selection="{ selectedRowKeys: refSelectedRowKeys, onChange: onSelectChange }"
     requestUrl="repairOrder/queryPage"
+    ref="tableRef"
   >
     <template #address="{ record, column }">
-      <span > 动态slot record:{{ record.salesName }} column: {{ column }}</span>
+      <span > 动态slot record:{{ record.salesName }} column: {{ column.id }}</span>
     </template>
     <template #address2="{ record, column }">
       <span > address1 record:{{ record.salesName }} column: {{ column.key }}</span>
@@ -20,6 +22,9 @@
 
 <script lang="ts" setup>
   import { ref, onMounted, reactive } from "vue";
+
+  import type { TableRef } from "@/components/BaseTable";
+
   import FormSearch from "@/components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
   import { formList, columns, tableHeaderBtns } from "./const";
@@ -27,20 +32,19 @@
   type Key = string | number;
 
   const formRef = ref();
+  const tableRef = ref<TableRef>();
   const loading = ref(false);
   const tableColumns = reactive(columns);
   const tableQueryParams = ref({});
   const refSelectedRowKeys = ref<Key[]>([])
 
   const formChange = (value: any, key: string) => {
-    // console.log(value);
     console.log("formChange", value, key);
     if (key === "age") {
       formRef.value.setFormState({"address": "new-beij", userName: "陈禹廷", textarea: "描述新"})
-      
     }
   }
-  
+
   const onSelectChange = (selectedRowKeys: Key[]) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     refSelectedRowKeys.value = selectedRowKeys
@@ -64,12 +68,13 @@
   })
 
   const onSearch = async (formState: any) => {
-    console.log("formState", formState);
-    // const res = await request.post("aa", {name: "陈"}, {show: true});
-    // console.log("res", res);
-    console.log("tableQueryParams", tableQueryParams.value);
-    
+    // console.log("formState", formState);
     tableQueryParams.value = formState;
+  }
+
+  const tableClick = (type: string, data: any) => {
+    console.log("type", type)
+    console.log("tableClick data", data)
   }
 
   const getState = () => {

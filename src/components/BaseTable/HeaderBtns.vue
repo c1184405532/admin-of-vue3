@@ -14,7 +14,7 @@
 <script lang="ts" setup>
   import { toRefs } from "vue";
 
-  import type { HeaderBtnsType } from "./types";
+  import type { HeaderBtnsType } from "./";
   import { defaultHeaderBtns } from "./const";
 
   interface BtnsType {
@@ -27,8 +27,6 @@
 
   const props = withDefaults(defineProps<BtnsType>(), { ...defaultHeaderBtns });
   const { btns } = toRefs(props);
-
-
 
   const emits = defineEmits<BtnsEmits>();
 

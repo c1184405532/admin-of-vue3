@@ -174,7 +174,7 @@ const columns: BaseTableColumnsType = [
   },
 ];
 
-import type { HeaderBtnsType } from "@components/BaseTable/types";
+import type { HeaderBtnsType } from "@components/BaseTable";
 
 const tableHeaderBtns: HeaderBtnsType = [
   { label: "新增", value: "add", type: "primary" },
