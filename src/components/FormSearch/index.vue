@@ -45,13 +45,14 @@
 
 <script lang="ts" setup>
   import { reactive, ref, toRefs, nextTick } from "vue";
-  import type { FormInstance } from "ant-design-vue";
+
+  import ComponentMap from "@components/FormItemComs";
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
+  import type { FormInstance } from "ant-design-vue";
   import type { AnyPropName, FormListRowType } from "@types";
 
   import { defaultProps } from "./const";
-  import ComponentMap from "@components/FormItemComs";
   
   interface PropsType {
     data: Array<FormListRowType>, // 表单数据源

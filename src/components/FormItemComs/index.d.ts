@@ -1,4 +1,4 @@
-import type { AnyPropName }  from "@types"
+import type { AnyPropName } from "@types";
 
 // defineProps 暂时不支持外部导入使用,等待 vue3 官方修复; https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props
 interface FormItemProps {

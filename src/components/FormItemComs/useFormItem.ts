@@ -1,5 +1,5 @@
 
-import { FormItemProps, FormItemEmits } from "./types";
+import { FormItemProps, FormItemEmits } from "@types";
 
 export function useChange(emits: FormItemEmits, props: FormItemProps, value: any) {
   const { change, name } = props;

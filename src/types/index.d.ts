@@ -1,5 +1,6 @@
 
-import type { FormListRowType } from "@components/FormItemComs/types";
+import type { FormItemEmits, FormItemProps, FormListRowType } from "@/components/FormItemComs/index.d";
+import type { PropsType as FormSearchProps, FormSearchEmits, FormSearchRef } from "@components/FormSearch";
 import type {
   BaseTableColumnsType,
   BaseTableColumnType,
@@ -14,7 +15,14 @@ interface AnyPropName {
 
 export type {
   AnyPropName,
+
+  FormItemProps,
+  FormItemEmits,
   FormListRowType,
+
+  FormSearchProps,
+  FormSearchEmits,
+  FormSearchRef,
 
   BaseTableColumnType,
   BaseTableColumnsType,
