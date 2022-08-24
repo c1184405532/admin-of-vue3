@@ -23,9 +23,9 @@
 <script lang="ts" setup>
   import { ref, onMounted, reactive } from "vue";
 
-  import type { TableRef } from "@/components/BaseTable";
+  import type { TableRef } from "@components/BaseTable";
 
-  import FormSearch from "@/components/FormSearch/index.vue";
+  import FormSearch from "@components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
   import { formList, columns, tableHeaderBtns } from "./const";
   

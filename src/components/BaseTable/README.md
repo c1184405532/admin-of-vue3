@@ -28,32 +28,43 @@
 ## 使用代码
 
 ```js
-  <BaseTable
-    @click="tableClick"
-    :columns="tableColumns"
-    :query="tableQueryParams"
-    :header-btns="tableHeaderBtns"
-    :row-selection="{ selectedRowKeys: refSelectedRowKeys, onChange: onSelectChange }"
-    requestUrl="repairOrder/queryPage"
-    ref="tableRef"
-  >
-    <template #address="{ record, column }">
-      <span > 动态slot record:{{ record.salesName }} column.key(address): {{ column.key }}</span>
-    </template>
-  </BaseTable>
+  <template>
+    <BaseTable
+      @click="tableClick"
+      :columns="tableColumns"
+      :query="tableQueryParams"
+      :header-btns="tableHeaderBtns"
+      :row-selection="{ selectedRowKeys: refSelectedRowKeys, onChange: onSelectChange }"
+      requestUrl="repairOrder/queryPage"
+      ref="tableRef"
+    >
+      <template #address="{ record, column }">
+        <span > 动态slot record:{{ record.salesName }} column.key(address): {{ column.key }}</span>
+      </template>
+    </BaseTable>
+  </template>
 
-  const tableRef = ref<TableRef>();
-  const tableColumns = reactive(columns);
-  const tableQueryParams = ref({});
-  const refSelectedRowKeys = ref<Key[]>([])
+  <script lang="ts" setup>
+    import { ref, reactive } from "vue";
+    import type { TableRef } from "@components/BaseTable";
+    import BaseTable from "@components/BaseTable/index.vue";
+    import { formList, columns, tableHeaderBtns } from "./const";
+    
+    type Key = string | number;
+    const tableRef = ref<TableRef>();
+    const tableColumns = reactive(columns);
+    const tableQueryParams = ref({});
+    const refSelectedRowKeys = ref<Key[]>([]);
 
-  const onSelectChange = (selectedRowKeys: Key[]) => {
-    refSelectedRowKeys.value = selectedRowKeys
-  };
+    const onSelectChange = (selectedRowKeys: Key[]) => {
+      console.log("selectedRowKeys changed: ", selectedRowKeys);
+      refSelectedRowKeys.value = selectedRowKeys
+    };
 
-  const tableClick = (type: string, data: any) => {
-    console.log("type", type)
-    console.log("tableClick data", data)
-  }
+    const tableClick = (type: string, data: any) => {
+      console.log("type", type)
+      console.log("tableClick data", data)
+    }
+  </script>
 
 ```
