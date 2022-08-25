@@ -1,7 +1,7 @@
 <template>
   <h1>首页</h1>
+  <BaseForm :data="formList" :loading="loading" @change="formChange" ref="baseFormRef"/>
   <FormSearch :data="formList" :loading="loading" @change="formChange" @search="onSearch" ref="formRef"/>
-  <a-button @click="getState">获取数据</a-button>
   <BaseTable
     @click="tableClick"
     :columns="tableColumns"
@@ -18,28 +18,44 @@
       <span > address1 record:{{ record.salesName }} column: {{ column.key }}</span>
     </template>
   </BaseTable>
+  <BaseFormModal
+    v-model="baseFormModalVisible"
+    @formChange="formChange"
+    @submit="modalSubmit"
+    :data="formList"
+    :cancel-text="`取消返回`"
+    title="标题"
+    ref="baseFormModalRef"
+  />
 </template>
 
 <script lang="ts" setup>
-  import { ref, onMounted, reactive } from "vue";
+  import { ref, onMounted, reactive, watch } from "vue";
 
   import type { TableRef } from "@components/BaseTable";
+  import type { BaseFormModalInstance } from "@types";
 
   import FormSearch from "@components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
+  import BaseFormModal from "@components/BaseFormModal/index.vue";
+  import BaseForm from "@components/BaseForm/index.vue";
   import { formList, columns, tableHeaderBtns } from "./const";
   
   type Key = string | number;
 
   const formRef = ref();
+  const baseFormRef = ref();
+  const baseFormModalRef = ref<BaseFormModalInstance>()
   const tableRef = ref<TableRef>();
   const loading = ref(false);
   const tableColumns = reactive(columns);
   const tableQueryParams = ref({});
   const refSelectedRowKeys = ref<Key[]>([])
 
-  const formChange = (value: any, key: string) => {
-    console.log("formChange", value, key);
+  const baseFormModalVisible = ref(false);
+
+  const formChange = (key: string, value: any): void => {
+    console.log("formChange",key, value);
     if (key === "age") {
       formRef.value.setFormState({"address": "new-beij", userName: "陈禹廷", textarea: "描述新"})
     }
@@ -49,6 +65,11 @@
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     refSelectedRowKeys.value = selectedRowKeys
   };
+
+  watch(baseFormModalVisible, value => {
+    console.log("baseFormModalVisible", baseFormModalVisible.value);
+    
+  })  
 
   onMounted(() => {
     console.log("FormSearchRef", formRef.value.getFormState());
@@ -72,20 +93,32 @@
     tableQueryParams.value = formState;
   }
 
-  const tableClick = (type: string, data: any) => {
+
+  const modalSubmit = (data: any) => {
+    console.log("modalSubmit", data);
+    if (data) baseFormModalVisible.value = false
+  }
+
+  const tableClick = async (type: string, data: any) => {
+    if(type === "changColumns") {
+      tableColumns[2] = {
+        title: "Full Name",
+        width: 100,
+        // dataIndex: 'name',
+        key: "name",
+      };
+      console.log("FormSearchRef", formRef.value.getFormState());
+    }
+
+    if (type === "add") baseFormModalVisible.value = true;
+    if (type === "export") {
+      const res = await baseFormRef.value.submit();
+      console.log("submit", res);
+      
+    }
     console.log("type", type)
     console.log("tableClick data", data)
   }
 
-  const getState = () => {
-    tableColumns[2] = {
-      title: "Full Name",
-      width: 100,
-      // dataIndex: 'name',
-      key: "name",
-    };
-    console.log("FormSearchRef", formRef.value.getFormState());
-  }
-  
-  
+
 </script>

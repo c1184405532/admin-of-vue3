@@ -1,4 +1,6 @@
 
+import type { BaseFormInstance } from "@components/BaseForm";
+import type { BaseFormModalInstance } from "@components/BaseFormModal";
 import type { FormItemEmits, FormItemProps, FormListRowType } from "@/components/FormItemComs/index.d";
 import type { PropsType as FormSearchProps, FormSearchEmits, FormSearchRef } from "@components/FormSearch";
 import type {
@@ -15,6 +17,8 @@ interface AnyPropName {
 
 export type {
   AnyPropName,
+  BaseFormInstance,
+  BaseFormModalInstance,
 
   FormItemProps,
   FormItemEmits,

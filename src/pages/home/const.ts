@@ -65,7 +65,7 @@ const formList = [
     type: "textarea",
     label: "描述信息",
     defaultValue: "",
-    rules: [{ required: false, message: "Please input your username" }],
+    rules: [{ required: true, message: "Please input your username" }],
     props: {
       placeholder: "请输入描述信息",
       autoSize: true
@@ -179,6 +179,7 @@ import type { HeaderBtnsType } from "@components/BaseTable";
 const tableHeaderBtns: HeaderBtnsType = [
   { label: "新增", value: "add", type: "primary" },
   { label: "导出文件", value: "export", type: "default", danger: true },
+  { label: "修改列头", value: "changColumns", type: "default" },
 ]
 
 const data = [];
