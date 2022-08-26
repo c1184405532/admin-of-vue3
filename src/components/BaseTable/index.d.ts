@@ -10,7 +10,7 @@ interface HeaderBtnType extends ButtonProps {
   value: string | number,
 }
 
-interface TableRef {
+interface BaseTableInstance {
   getTableList: () => void
 }
 
@@ -26,5 +26,5 @@ export type {
   HeaderBtnsType,
 
   SizeType,
-  TableRef
+  BaseTableInstance
 }

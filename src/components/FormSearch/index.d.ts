@@ -16,9 +16,9 @@ interface FormSearchEmits {
   (e: "search", values: any): void,
 }
 
-interface FormSearchRef {
+interface FormSearchInstance {
   getFormState: (payload?: string | string[]) => string | object,
-  setFormState: (key: string | AnyPropName, value: any) => void,
+  setFormState: (key: string | AnyPropName, value?: any) => void,
 }
 
-export type { PropsType, FormSearchEmits, FormSearchRef }
+export type { PropsType, FormSearchEmits, FormSearchInstance }

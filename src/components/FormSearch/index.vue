@@ -133,7 +133,7 @@
     return {};
   };
 
-  const setFormState = (key: string | AnyPropName, value: any) => {
+  const setFormState = (key: string | AnyPropName, value?: any) => {
     const type = key ? typeof key : "not";
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

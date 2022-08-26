@@ -68,7 +68,7 @@
     return baseFormRef.value?.getFormState(payload);
   };
 
-  const setFormState = (key: string | AnyPropName, value: any) => {
+  const setFormState = (key: string | AnyPropName, value?: any) => {
     baseFormRef.value?.setFormState(key, value);
   }
 

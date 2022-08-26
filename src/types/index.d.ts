@@ -2,13 +2,13 @@
 import type { BaseFormInstance } from "@components/BaseForm";
 import type { BaseFormModalInstance } from "@components/BaseFormModal";
 import type { FormItemEmits, FormItemProps, FormListRowType, FormListDatas } from "@/components/FormItemComs/index.d";
-import type { PropsType as FormSearchProps, FormSearchEmits, FormSearchRef } from "@components/FormSearch";
+import type { PropsType as FormSearchProps, FormSearchEmits, FormSearchInstance } from "@components/FormSearch";
 import type {
   BaseTableColumnsType,
   BaseTableColumnType,
   HeaderBtnsType,
   HeaderBtnType,
-  TableRef
+  BaseTableInstance
 } from "@components/BaseTable";
 
 interface AnyPropName {
@@ -27,11 +27,11 @@ export type {
 
   FormSearchProps,
   FormSearchEmits,
-  FormSearchRef,
+  FormSearchInstance,
 
   BaseTableColumnType,
   BaseTableColumnsType,
   HeaderBtnsType,
   HeaderBtnType,
-  TableRef
+  BaseTableInstance
 }

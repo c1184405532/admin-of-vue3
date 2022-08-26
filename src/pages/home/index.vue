@@ -1,7 +1,13 @@
 <template>
   <h1>首页</h1>
   <BaseForm :data="formList" :loading="loading" @change="formChange" ref="baseFormRef"/>
-  <FormSearch :data="formList" :loading="loading" @change="formChange" @search="onSearch" ref="formRef"/>
+  <FormSearch
+    @change="formChange"
+    @search="onSearch"
+    :data="formList"
+    :loading="loading"
+    ref="formRef"
+  />
   <BaseTable
     @click="tableClick"
     :columns="tableColumns"
@@ -34,8 +40,8 @@
 <script lang="ts" setup>
   import { ref, onMounted, reactive, watch } from "vue";
 
-  import type { TableRef } from "@components/BaseTable";
-  import type { BaseFormModalInstance } from "@types";
+  import type { BaseTableInstance } from "@components/BaseTable";
+  import type { BaseFormModalInstance, FormSearchInstance } from "@types";
 
   import FormSearch from "@components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
@@ -45,10 +51,10 @@
   
   type Key = string | number;
 
-  const formRef = ref();
+  const formRef = ref<FormSearchInstance>();
   const baseFormRef = ref();
   const baseFormModalRef = ref<BaseFormModalInstance>()
-  const tableRef = ref<TableRef>();
+  const tableRef = ref<BaseTableInstance>();
   const loading = ref(false);
   const modalLoading = ref(false);
   const modalConfirmLoading = ref(false);
@@ -61,7 +67,7 @@
   const formChange = (key: string, value: any): void => {
     console.log("formChange",key, value);
     if (key === "age") {
-      formRef.value.setFormState({"address": "new-beij", userName: "陈禹廷", textarea: "描述新"})
+      formRef.value!.setFormState({"address": "new-beij", userName: "陈禹廷", textarea: "描述新"})
     }
   }
 
@@ -76,8 +82,8 @@
   })  
 
   onMounted(() => {
-    console.log("FormSearchRef", formRef.value.getFormState());
-    const payload = formRef.value.getFormState();
+    console.log("FormSearchRef", formRef.value!.getFormState());
+    const payload = formRef.value!.getFormState();
     console.log("jons", JSON.stringify(payload));
     loading.value = true;
 
@@ -118,7 +124,7 @@
         // dataIndex: 'name',
         key: "name",
       };
-      console.log("FormSearchRef", formRef.value.getFormState());
+      console.log("FormSearchRef", formRef.value!.getFormState());
     }
 
     if (type === "add") {
