@@ -5,7 +5,7 @@ const defaultProps = {
   width: 540,
   loading: false,
   loadingTip: "",
-  delayTime: 500,
+  delayTime: 350,
   colSpan: 24, // n / 24
   labelCol: () => ({ span: 4, offset: 0 }),
   wrapperCol: () => ({ span: 18, offset: 0 })

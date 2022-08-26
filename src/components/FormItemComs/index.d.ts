@@ -29,8 +29,11 @@ interface FormListRowType {
   props?: object // 实际内容组件的props集合同antd props 一致; 如 a-input -> placeholeder; 详细信息请前往独立组件中的提示进行查看
 }
 
+type FormListDatas = FormListRowType[];
+
 export type {
   FormItemProps,
   FormItemEmits,
-  FormListRowType
+  FormListRowType,
+  FormListDatas
 }

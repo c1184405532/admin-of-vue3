@@ -50,12 +50,12 @@
   import { DownOutlined, UpOutlined } from "@ant-design/icons-vue";
 
   import type { FormInstance } from "ant-design-vue";
-  import type { AnyPropName, FormListRowType } from "@types";
+  import type { AnyPropName, FormListDatas } from "@types";
 
   import { defaultProps } from "./const";
   
   interface PropsType {
-    data: Array<FormListRowType>, // 表单数据源
+    data: FormListDatas // 表单数据源
     loading?: boolean, // 是否加载中
     loadingTip?: string, // 自定义加载提示文案
     delayTime?: number, // 延迟显示loading状态, 当loading状态在 delayTime 时间内结束, 则不显示loding UI状态 单位ms

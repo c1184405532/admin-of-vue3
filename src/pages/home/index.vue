@@ -12,7 +12,7 @@
     ref="tableRef"
   >
     <template #address="{ record, column }">
-      <span > 动态slot record:{{ record.salesName }} column: {{ column.id }}</span>
+      <span> 动态slot record:{{ record.salesName }} column: {{ column.id }}</span>
     </template>
     <template #address2="{ record, column }">
       <span > address1 record:{{ record.salesName }} column: {{ column.key }}</span>
@@ -22,6 +22,8 @@
     v-model="baseFormModalVisible"
     @formChange="formChange"
     @submit="modalSubmit"
+    :loading="modalLoading"
+    :confirm-loading="modalConfirmLoading"
     :data="formList"
     :cancel-text="`取消返回`"
     title="标题"
@@ -48,6 +50,8 @@
   const baseFormModalRef = ref<BaseFormModalInstance>()
   const tableRef = ref<TableRef>();
   const loading = ref(false);
+  const modalLoading = ref(false);
+  const modalConfirmLoading = ref(false);
   const tableColumns = reactive(columns);
   const tableQueryParams = ref({});
   const refSelectedRowKeys = ref<Key[]>([])
@@ -96,7 +100,14 @@
 
   const modalSubmit = (data: any) => {
     console.log("modalSubmit", data);
-    if (data) baseFormModalVisible.value = false
+    if (data) {
+      modalConfirmLoading.value = true;
+      setTimeout(() => {
+        modalConfirmLoading.value = false;
+        baseFormModalVisible.value = false;
+      }, 1000);
+      
+    }
   }
 
   const tableClick = async (type: string, data: any) => {
@@ -110,7 +121,13 @@
       console.log("FormSearchRef", formRef.value.getFormState());
     }
 
-    if (type === "add") baseFormModalVisible.value = true;
+    if (type === "add") {
+      baseFormModalVisible.value = true;
+      modalLoading.value = true;
+      setTimeout(() => {
+        modalLoading.value = false;
+      }, 1500);
+    }
     if (type === "export") {
       const res = await baseFormRef.value.submit();
       console.log("submit", res);

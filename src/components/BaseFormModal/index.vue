@@ -17,15 +17,16 @@
   import BaseForm from "@components/BaseForm/index.vue";
 
   import type { ModalProps } from "ant-design-vue";
-  import type { AnyPropName, FormListRowType, BaseFormInstance } from "@types";
+  import type { AnyPropName, FormListDatas, BaseFormInstance } from "@types";
   
   import { defaultProps } from "./const";
 
   interface PropsType extends ModalProps {
-    data: Array<FormListRowType>, // 数据源
+    data: FormListDatas, // 数据源
     modelValue: boolean,
     title?: string, // 弹窗标题
     width?: number,
+    confirmLoading?: boolean, // 确定按钮是否显示loading状态
     loading?: boolean, // 是否加载中
     loadingTip?: string, // 自定义加载提示文案
     delayTime?: number, // 延迟显示loading状态, 当loading状态在 delayTime 时间内结束, 则不显示loding UI状态 单位ms

@@ -1,7 +1,7 @@
 
 import type { BaseFormInstance } from "@components/BaseForm";
 import type { BaseFormModalInstance } from "@components/BaseFormModal";
-import type { FormItemEmits, FormItemProps, FormListRowType } from "@/components/FormItemComs/index.d";
+import type { FormItemEmits, FormItemProps, FormListRowType, FormListDatas } from "@/components/FormItemComs/index.d";
 import type { PropsType as FormSearchProps, FormSearchEmits, FormSearchRef } from "@components/FormSearch";
 import type {
   BaseTableColumnsType,
@@ -23,6 +23,7 @@ export type {
   FormItemProps,
   FormItemEmits,
   FormListRowType,
+  FormListDatas,
 
   FormSearchProps,
   FormSearchEmits,
