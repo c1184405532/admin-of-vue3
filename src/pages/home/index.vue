@@ -24,6 +24,7 @@
       <span > address1 record:{{ record.salesName }} column: {{ column.key }}</span>
     </template>
   </BaseTable>
+
   <BaseFormModal
     v-model="baseFormModalVisible"
     @formChange="formChange"
@@ -35,6 +36,11 @@
     title="标题"
     ref="baseFormModalRef"
   />
+
+  <BaseFormDrawer
+    v-model="baseFormDrawerVisible"
+    title="订单详情"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -45,8 +51,10 @@
 
   import FormSearch from "@components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
+  import BaseFormDrawer from "@components/BaseFormDrawer/index.vue";
   import BaseFormModal from "@components/BaseFormModal/index.vue";
   import BaseForm from "@components/BaseForm/index.vue";
+
   import { formList, columns, tableHeaderBtns } from "./const";
   
   type Key = string | number;
@@ -62,6 +70,7 @@
   const tableQueryParams = ref({});
   const refSelectedRowKeys = ref<Key[]>([])
 
+  const baseFormDrawerVisible = ref(false);
   const baseFormModalVisible = ref(false);
 
   const formChange = (key: string, value: any): void => {
@@ -138,6 +147,10 @@
       const res = await baseFormRef.value.submit();
       console.log("submit", res);
       
+    }
+
+    if (type === "edit") {
+      baseFormDrawerVisible.value = true;
     }
     console.log("type", type)
     console.log("tableClick data", data)
