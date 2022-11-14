@@ -1,14 +1,28 @@
+import type { DrawerProps } from "ant-design-vue";
+import type { HeaderBtnsType } from "@types";
+import type { TopBtnsType } from "./index.d";
+
+const defaultTopBtns: TopBtnsType = [{ label: "关闭", value: "close", type: "default" }, { label: "提交", value: "submit", type: "primary" }];
+const defaultHeaderBtns: HeaderBtnsType = [{ label: "新增", value: "add" }];
+
 // 默认值为引用类型的, 需要包装一个函数 return 出去 key: () => [0, 0] | {};
 const defaultProps = {
   // title: "新增",
   width: 1000,
+  placement: <DrawerProps["placement"]>"right",
   loading: false,
   loadingTip: "",
   delayTime: 200,
-  collapseActiveKey: "1",
+  topBtns: () => (defaultTopBtns)
   // colSpan: 24, // n / 24
   // labelCol: () => ({ span: 4, offset: 0 }),
   // wrapperCol: () => ({ span: 18, offset: 0 })
 }
 
-export { defaultProps };
+const defaultBaseFormProps = {
+  colSpan: 6, // n / 24
+  labelCol: { span: 6, offset: 0 },
+  wrapperCol: { span: 18, offset: 0 },
+}
+
+export { defaultProps, defaultBaseFormProps, defaultHeaderBtns };

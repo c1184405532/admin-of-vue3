@@ -1,10 +1,13 @@
 <template>
   <div class="btns-box">
-    <a-button class="btn"
+    <a-button
       v-for="btn in btns"
       v-bind="btn"
-      @click="handClick(btn)"
+      @click.stop="handClick(btn)"
       :key="btn.value"
+      :type="btn.type"
+      :size="btn.size"
+      class="top-btn-box"
     >
       {{ btn.label }}
     </a-button>
@@ -14,22 +17,20 @@
 <script lang="ts" setup>
   import { toRefs } from "vue";
 
-  import type { HeaderBtnsType } from "./";
-  import { defaultHeaderBtns } from "./const";
+  import type { TopBtnsType } from "./index.d";
 
   interface BtnsType {
-    btns?: HeaderBtnsType
+    btns?: TopBtnsType
   }
 
   interface BtnsEmits {
     (e: "click", value: any): void,
   }
 
-  const props = withDefaults(defineProps<BtnsType>(), { ...defaultHeaderBtns });
+  const props = defineProps<BtnsType>()
   const { btns } = toRefs(props);
 
   const emits = defineEmits<BtnsEmits>();
-
   const handClick = (btn: any) => {
     emits("click", btn);
   }
@@ -38,12 +39,11 @@
 
 <style lang="less" scoped>
 .btns-box{
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 0 12px 0;
-  margin-left: -10px;
-  .btn{
-    margin-left: 10px;
+  .top-btn-box {
+    margin-left: 16px;
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }
 </style>

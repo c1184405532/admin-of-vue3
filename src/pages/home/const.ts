@@ -125,7 +125,7 @@ const formList = [
     }
   }
 ]
-import type { BaseTableColumnsType } from "@types"
+import type { BaseTableColumnsType, BaseFormDrawerListType } from "@types"
 const columns: BaseTableColumnsType = [
   {
     title: "车牌号",
@@ -193,11 +193,89 @@ data.push({
 });
 }
 
+const createFormDrawerData = () => {
+  const sexOptions = [
+    { label: "男", value: "man" },
+    { label: "女", value: "woman" },
+  ]
+  return [
+    {
+      key: "name",
+      type: "input",
+      label: "姓名",
+      defaultValue: "",
+      options: [],
+      props: {
+        placeholder: "请输入姓名",
+      },
+      rules: [{ required: true, message: "请输入姓名!" }],
+    },
+    {
+      key: "age",
+      type: "input-number",
+      label: "年龄",
+      defaultValue: "",
+      options: [],
+      props: {
+        placeholder: "请输入年龄",
+      },
+      rules: [{ required: true, message: "请输入年龄!" }],
+    },
+    {
+      key: "address",
+      type: "input",
+      label: "地址",
+      defaultValue: "",
+      span: 12,
+      props: {
+        placeholder: "请输入地址",
+      },
+      options: [],
+      rules: [{ required: true, message: "请输入地址!" }],
+    },
+    {
+      key: "sex",
+      type: "select",
+      label: "性别",
+      defaultValue: "",
+      span: 12,
+      props: {
+        placeholder: "请选择性别",
+      },
+      options: sexOptions, 
+      rules: [{ required: true, message: "请输入性别!" }],
+    }
+  ]
+}
+
+const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
+  /**
+   
+   * @param { Boolean } collapsePanelActive 面板是否展开
+   * @param { Boolean } loading 面板loading状态
+   * @param { String } title 面板标题
+   * @param { Array } headerBtns 面板按钮组
+   * @param { String } ref 面板ref名，用于获取输入数据
+   */
+  const formData = createFormDrawerData();
+  return [
+    {
+      key: "userInfo",
+      title: "用户信息",
+      formData: formData,
+      headerBtns: [{ label: "保存信息", value: "addUserInfo" }],
+      collapsePanelActive: true,
+      ref: "userInfoRef"
+    }
+  ]
+};
+
 export {
   formList,
   data,
   columns,
-  tableHeaderBtns
+  tableHeaderBtns,
+  createBaseFormDrawerList
 }
 
 export type { FormListRowType, AnyPropName }

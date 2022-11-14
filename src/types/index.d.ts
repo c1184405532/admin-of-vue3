@@ -11,6 +11,8 @@ import type {
   BaseTableInstance
 } from "@components/BaseTable";
 
+import type { BaseFormDrawerType, BaseFormDrawerListType, DrawerClickDataType } from "@components/BaseFormDrawer"; 
+
 interface AnyPropName {
   [propname: string | symbol]: any
 }
@@ -33,5 +35,9 @@ export type {
   BaseTableColumnsType,
   HeaderBtnsType,
   HeaderBtnType,
-  BaseTableInstance
+  BaseTableInstance,
+
+  BaseFormDrawerType,
+  BaseFormDrawerListType,
+  DrawerClickDataType
 }

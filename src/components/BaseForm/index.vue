@@ -68,7 +68,11 @@
 
   function setDefaultFormState() {
     data.value.forEach(v => {
-      if (formState[v.key] !== v.defaultValue) formState[v.key] = v.defaultValue;      
+      if (formState[v.key] !== v.defaultValue) {
+        // select 的默认值如果为 "" 该组件会认为有值
+        const defaultValue = v.type === "select" && v.defaultValue === "" ? undefined : v.defaultValue; 
+        formState[v.key] = defaultValue;
+      }
     });
   }
 

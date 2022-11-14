@@ -22,6 +22,6 @@ const defaultOperations = [
 
 const defaultHeaderBtns = {
   btns: (): HeaderBtnsType => ([{ label: "新增", value: "add", type: "primary" }])
-} 
+}
 
 export { baseTableDefaultProps, defaultOperations, defaultPagination, defaultHeaderBtns };

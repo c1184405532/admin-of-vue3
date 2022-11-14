@@ -44,6 +44,7 @@ declare module '@vue/runtime-core' {
     BaseFormDrawer: typeof import('./src/components/BaseFormDrawer/index.vue')['default']
     BaseFormModal: typeof import('./src/components/BaseFormModal/index.vue')['default']
     BaseTable: typeof import('./src/components/BaseTable/index.vue')['default']
+    copy: typeof import('./src/components/BaseFormDrawer/HeaderBtns copy.vue')['default']
     FormItemDatePicker: typeof import('./src/components/FormItemComs/FormItemDatePicker.vue')['default']
     FormItemInput: typeof import('./src/components/FormItemComs/FormItemInput.vue')['default']
     FormItemInputNumber: typeof import('./src/components/FormItemComs/FormItemInputNumber.vue')['default']
@@ -53,12 +54,13 @@ declare module '@vue/runtime-core' {
     FormItemTreeSelect: typeof import('./src/components/FormItemComs/FormItemTreeSelect.vue')['default']
     FormSearch: typeof import('./src/components/FormSearch/index.vue')['default']
     HeaderBar: typeof import('./src/components/Layout/HeaderBar.vue')['default']
-    HeaderBtns: typeof import('./src/components/BaseTable/HeaderBtns.vue')['default']
+    HeaderBtns: typeof import('./src/components/BaseFormDrawer/HeaderBtns.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     RenderRouterView: typeof import('./src/components/RenderRouterView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SiderBar: typeof import('./src/components/Layout/SiderBar.vue')['default']
     SubMenuTree: typeof import('./src/components/Layout/SubMenuTree.vue')['default']
+    TopBtns: typeof import('./src/components/BaseFormDrawer/TopBtns.vue')['default']
   }
 }

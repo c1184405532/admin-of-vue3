@@ -39,7 +39,11 @@
 
   <BaseFormDrawer
     v-model="baseFormDrawerVisible"
+    @submit="drawerSubmit"
+    @click="drawerClick"
+    :data="baseFormDrawerList"
     title="订单详情"
+    ref="baseFormDrawerRef"
   />
 </template>
 
@@ -47,7 +51,7 @@
   import { ref, onMounted, reactive, watch } from "vue";
 
   import type { BaseTableInstance } from "@components/BaseTable";
-  import type { BaseFormModalInstance, FormSearchInstance } from "@types";
+  import type { BaseFormModalInstance, FormSearchInstance, DrawerClickDataType } from "@types";
 
   import FormSearch from "@components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
@@ -55,7 +59,7 @@
   import BaseFormModal from "@components/BaseFormModal/index.vue";
   import BaseForm from "@components/BaseForm/index.vue";
 
-  import { formList, columns, tableHeaderBtns } from "./const";
+  import { formList, columns, tableHeaderBtns, createBaseFormDrawerList } from "./const";
   
   type Key = string | number;
 
@@ -63,6 +67,8 @@
   const baseFormRef = ref();
   const baseFormModalRef = ref<BaseFormModalInstance>()
   const tableRef = ref<BaseTableInstance>();
+  const baseFormDrawerRef = ref();
+
   const loading = ref(false);
   const modalLoading = ref(false);
   const modalConfirmLoading = ref(false);
@@ -70,6 +76,7 @@
   const tableQueryParams = ref({});
   const refSelectedRowKeys = ref<Key[]>([])
 
+  const baseFormDrawerList = ref(createBaseFormDrawerList());
   const baseFormDrawerVisible = ref(false);
   const baseFormModalVisible = ref(false);
 
@@ -125,6 +132,10 @@
     }
   }
 
+  const drawerSubmit = (submitData: any) => {
+    console.log("submitData", submitData);
+  }
+
   const tableClick = async (type: string, data: any) => {
     if(type === "changColumns") {
       tableColumns[2] = {
@@ -154,6 +165,14 @@
     }
     console.log("type", type)
     console.log("tableClick data", data)
+  }
+
+  const drawerClick = async ({ key, value, panel }: DrawerClickDataType ) => {
+    console.log("key, value", key, value);
+    if (key === "userInfo" && value === "add") {
+      const data = await baseFormDrawerRef.value.submit(panel.ref);
+      console.log("drawerClick data", data);
+    }
   }
 
 
