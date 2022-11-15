@@ -1,13 +1,13 @@
 <template>
-  <a-spin :spinning="loading" :tip="loadingTip" :delay="delayTime">
-    <a-drawer
-      v-bind="props"
-      :visible="_visible"
-      @close="onClose"
-    >
-      <template #extra>
-        <TopBtns :btns="topBtns" @click="topBtnOnClick"/>
-      </template>
+  <a-drawer
+    v-bind="props"
+    :visible="_visible"
+    @close="onClose"
+  >
+    <template #extra>
+      <TopBtns :btns="topBtns" @click="topBtnOnClick"/>
+    </template>
+    <a-spin :spinning="loading" :tip="loadingTip" :delay="delayTime">
       <a-collapse
         v-model:activeKey="_collapseActiveKey"
         expandIconPosition="right"
@@ -15,19 +15,18 @@
       >
         <a-collapse-panel v-for="panel in data" :header="panel.title" :key="panel.key">
           <template #extra>
-            <HeaderBtns @click="(btn) => headerBtnOnClick({ headerBtn: btn, panel })" :btns="defaultHeaderBtns"/>
+            <HeaderBtns @click="(btn) => headerBtnOnClick({ headerBtn: btn, panel })" :btns="panel.headerBtns"/>
           </template>
           <BaseForm
-            v-bind="defaultBaseFormProps"
+            v-bind="panel.formProps || defaultBaseFormProps"
             :data="panel.formData"
-            :loading="false"
             @change="() => {}"
             :ref="el => drawerFormRefs[panel.ref] = el"
           />
         </a-collapse-panel>
-      </a-collapse>  
-    </a-drawer>
-  </a-spin>
+      </a-collapse>
+    </a-spin>
+  </a-drawer>
 </template>
 
 <script lang="ts" setup>
@@ -41,7 +40,7 @@
   import type { BaseFormDrawerListType, DrawerClickDataType, AnyPropName } from "@types";
   import type { TopBtnType, TopBtnsType } from "./index.d";
 
-  import { defaultProps, defaultBaseFormProps, defaultHeaderBtns } from "./const";
+  import { defaultProps, defaultBaseFormProps } from "./const";
 
   const drawerFormRefs = ref<AnyPropName>({});
 
@@ -51,8 +50,6 @@
     modelValue: boolean,
     topBtns?: TopBtnsType,
     placement?: DrawerProps["placement"],
-    // collapseActiveKey?: string[] | string, // 折叠面板选中的key
-    // confirmLoading?: boolean, // 确定按钮是否显示loading状态
     width?: number,
     loading?: boolean, // 是否加载中
     loadingTip?: string, // 自定义加载提示文案
@@ -72,7 +69,13 @@
   const emits = defineEmits<Emits>();
   const props = withDefaults(defineProps<PropsType>(), { ...defaultProps });
   
-  const { data, modelValue, topBtns } = toRefs(props);
+  const { data, modelValue, topBtns, loading, loadingTip, delayTime } = toRefs(props);
+
+  
+  watch(loading, value => {
+    console.log("loading", value);
+  })
+  
 
   const _collapseActiveKey = ref<string[]>([]);
   setCollapseActives();
@@ -120,7 +123,7 @@
   function setCollapseActives() {
     const keys: string[] = [];
     data.value.forEach(v => {
-      if (v.collapsePanelActive) keys.push(v.key);
+      if (v.collapsePanelActive !== false) keys.push(v.key);
     })
     _collapseActiveKey.value = keys;
   }

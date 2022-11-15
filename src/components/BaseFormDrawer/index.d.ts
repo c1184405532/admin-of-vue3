@@ -1,12 +1,18 @@
 import type { ButtonProps } from "ant-design-vue";
 import type { HeaderBtnsType, FormListDatas } from "@types";
+import type { PropsType } from "@components/BaseForm/index";
+
+interface BaseFormPropsType extends Omit<PropsType, "data"> {
+  data?: undefined,
+}
 
 interface BaseFormDrawerType {
   key: string, // 每个 collapse-panel key
   title: string, // 每个 collapse-panel title
   formData: FormListDatas, // 表单数据
-  headerBtns: HeaderBtnsType, // collapse-panel 内按钮组数据
-  collapsePanelActive: boolean, // 当前 collapse-panel 是否展开
+  formProps?: BaseFormPropsType, // 表单props
+  headerBtns?: HeaderBtnsType, // collapse-panel 内按钮组数据
+  collapsePanelActive?: boolean, // 当前 collapse-panel 是否展开 默认true
   ref: string, // 当前 collapse-panel form 的 ref, 用于表单提交(ref.submit)
 }
 

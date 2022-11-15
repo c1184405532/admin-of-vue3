@@ -42,6 +42,7 @@
     @submit="drawerSubmit"
     @click="drawerClick"
     :data="baseFormDrawerList"
+    :loading="drawerLoading"
     title="订单详情"
     ref="baseFormDrawerRef"
   />
@@ -79,6 +80,7 @@
   const baseFormDrawerList = ref(createBaseFormDrawerList());
   const baseFormDrawerVisible = ref(false);
   const baseFormModalVisible = ref(false);
+  const drawerLoading = ref(false);
 
   const formChange = (key: string, value: any): void => {
     console.log("formChange",key, value);
@@ -161,7 +163,11 @@
     }
 
     if (type === "edit") {
+      drawerLoading.value = true;
       baseFormDrawerVisible.value = true;
+      setTimeout(() => {
+        drawerLoading.value = false;
+      }, 2000);
     }
     console.log("type", type)
     console.log("tableClick data", data)
@@ -169,7 +175,7 @@
 
   const drawerClick = async ({ key, value, panel }: DrawerClickDataType ) => {
     console.log("key, value", key, value);
-    if (key === "userInfo" && value === "add") {
+    if (key === "userInfo" && value === "addUserInfo") {
       const data = await baseFormDrawerRef.value.submit(panel.ref);
       console.log("drawerClick data", data);
     }

@@ -250,7 +250,6 @@ const createFormDrawerData = () => {
 
 const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
   /**
-   
    * @param { Boolean } collapsePanelActive 面板是否展开
    * @param { Boolean } loading 面板loading状态
    * @param { String } title 面板标题
@@ -264,7 +263,7 @@ const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
       title: "用户信息",
       formData: formData,
       headerBtns: [{ label: "保存信息", value: "addUserInfo" }],
-      collapsePanelActive: true,
+      // collapsePanelActive: true,
       ref: "userInfoRef"
     }
   ]

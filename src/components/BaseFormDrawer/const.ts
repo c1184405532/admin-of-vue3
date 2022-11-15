@@ -1,9 +1,7 @@
 import type { DrawerProps } from "ant-design-vue";
-import type { HeaderBtnsType } from "@types";
 import type { TopBtnsType } from "./index.d";
 
-const defaultTopBtns: TopBtnsType = [{ label: "关闭", value: "close", type: "default" }, { label: "提交", value: "submit", type: "primary" }];
-const defaultHeaderBtns: HeaderBtnsType = [{ label: "新增", value: "add" }];
+const defaultTopBtns: TopBtnsType = [{ label: "关闭", value: "close", type: "default" }, { label: "保存", value: "submit", type: "primary" }];
 
 // 默认值为引用类型的, 需要包装一个函数 return 出去 key: () => [0, 0] | {};
 const defaultProps = {
@@ -25,4 +23,4 @@ const defaultBaseFormProps = {
   wrapperCol: { span: 18, offset: 0 },
 }
 
-export { defaultProps, defaultBaseFormProps, defaultHeaderBtns };
+export { defaultProps, defaultBaseFormProps };
