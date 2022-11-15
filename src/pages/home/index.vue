@@ -41,6 +41,7 @@
     v-model="baseFormDrawerVisible"
     @submit="drawerSubmit"
     @click="drawerClick"
+    @change="drawerChange"
     :data="baseFormDrawerList"
     :loading="drawerLoading"
     title="订单详情"
@@ -52,7 +53,7 @@
   import { ref, onMounted, reactive, watch } from "vue";
 
   import type { BaseTableInstance } from "@components/BaseTable";
-  import type { BaseFormModalInstance, FormSearchInstance, DrawerClickDataType } from "@types";
+  import type { BaseFormModalInstance, FormSearchInstance, DrawerClickDataType, DrawerChangeDataType } from "@types";
 
   import FormSearch from "@components/FormSearch/index.vue";
   import BaseTable from "@components/BaseTable/index.vue";
@@ -169,8 +170,6 @@
         drawerLoading.value = false;
       }, 2000);
     }
-    console.log("type", type)
-    console.log("tableClick data", data)
   }
 
   const drawerClick = async ({ key, value, panel }: DrawerClickDataType ) => {
@@ -179,6 +178,12 @@
       const data = await baseFormDrawerRef.value.submit(panel.ref);
       console.log("drawerClick data", data);
     }
+  }
+
+  const drawerChange = ({key, value, panel}: DrawerChangeDataType) => {
+    console.log("key", key);
+    console.log("value", value);
+    console.log("panel", panel);
   }
 
 

@@ -20,7 +20,7 @@
           <BaseForm
             v-bind="panel.formProps || defaultBaseFormProps"
             :data="panel.formData"
-            @change="() => {}"
+            @change="(key, value) => baseFormChange({form: {key, value}, panel})"
             :ref="el => drawerFormRefs[panel.ref] = el"
           />
         </a-collapse-panel>
@@ -37,47 +37,38 @@
   import HeaderBtns from "./HeaderBtns.vue";
 
   import type { DrawerProps } from "ant-design-vue";
-  import type { BaseFormDrawerListType, DrawerClickDataType, AnyPropName } from "@types";
+  import type { BaseFormDrawerListType, DrawerChangeDataType, DrawerClickDataType, AnyPropName } from "@types";
   import type { TopBtnType, TopBtnsType } from "./index.d";
 
   import { defaultProps, defaultBaseFormProps } from "./const";
 
-  const drawerFormRefs = ref<AnyPropName>({});
-
   interface PropsType extends DrawerProps {
-    title?: string, // 弹窗标题
     data: BaseFormDrawerListType, // 数据源
     modelValue: boolean,
-    topBtns?: TopBtnsType,
-    placement?: DrawerProps["placement"],
-    width?: number,
+
+    title?: string, // 弹窗标题
+    topBtns?: TopBtnsType, // 顶部按钮组
+    placement?: DrawerProps["placement"], // 抽屉出现的位置
+    width?: number, // 抽屉宽度
     loading?: boolean, // 是否加载中
     loadingTip?: string, // 自定义加载提示文案
     delayTime?: number, // 延迟显示loading状态, 当loading状态在 delayTime 时间内结束, 则不显示loding UI状态 单位ms
-    // colSpan?: number // 表单项一行占多少列 n/24
-    // labelCol?: AnyPropName, // 表单项 label 配置; https://www.antdv.com/components/grid-cn/#Col
-    // wrapperCol?: AnyPropName // 表单项 输入控件配置; 类型同 labelCol一致
   }
 
   interface Emits {
     (e: "update:modelValue", value: boolean): void;
-    (e: "click", value: any): void;
-    (e: "topClick", value: any): void;
-    (e: "submit", data: AnyPropName): void;
+    (e: "click", value: any): void; // panpel上的按钮点击
+    (e: "change", value: any): void; // panpel上的表单元素发生改变时触发
+    (e: "topClick", value: any): void; // 顶部按钮点击
+    (e: "submit", data: AnyPropName): void; // 顶部按钮 value = submit 时触发该函数, 提交抽屉下所有表单数据
   }
 
   const emits = defineEmits<Emits>();
   const props = withDefaults(defineProps<PropsType>(), { ...defaultProps });
-  
   const { data, modelValue, topBtns, loading, loadingTip, delayTime } = toRefs(props);
 
-  
-  watch(loading, value => {
-    console.log("loading", value);
-  })
-  
-
-  const _collapseActiveKey = ref<string[]>([]);
+  const drawerFormRefs = ref<AnyPropName>({}); // 所有表单的ref集合 {key: formInstance}
+  const _collapseActiveKey = ref<string[]>([]); // 设置展开的面板key
   setCollapseActives();
 
   // visible v-model 逻辑
@@ -109,6 +100,12 @@
     const { headerBtn, panel } = v;
     const data: DrawerClickDataType = { key: panel.key, value: headerBtn.value, headerBtn, panel };
     emits("click", data);
+  }
+
+  const baseFormChange = (v: any) => {
+    const { form, panel } = v;
+    const data: DrawerChangeDataType = {key: form.key, value: form.value, form, panel};
+    emits("change", data);
   }
 
   async function onSubmit(refKey: string): Promise<object> {

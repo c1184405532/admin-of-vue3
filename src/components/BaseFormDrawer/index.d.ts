@@ -21,10 +21,19 @@ interface TopBtnType extends ButtonProps {
   value: string,
 }
 
+interface TopBtnType extends ButtonProps {
+  label: string,
+  value: string,
+}
+
+interface formChangType extends ButtonProps {
+  key: string,
+  value: any,
+}
+
 type TopBtnsType = TopBtnType[];
-
 type BaseFormDrawerListType = BaseFormDrawerType[];
+type DrawerClickDataType = {key: string, value: string, headerBtn: HeaderBtnType, panel: BaseFormDrawerType};
+type DrawerChangeDataType = {key: string, value: any, form: formChangType, panel: BaseFormDrawerType};
 
-type DrawerClickDataType = { key: string, value: string, headerBtn: HeaderBtnType, panel: BaseFormDrawerType }
-
-export type { TopBtnType, TopBtnsType, BaseFormDrawerType, BaseFormDrawerListType, DrawerClickDataType };
+export type {TopBtnType, TopBtnsType, BaseFormDrawerType, BaseFormDrawerListType, DrawerClickDataType, DrawerChangeDataType};
