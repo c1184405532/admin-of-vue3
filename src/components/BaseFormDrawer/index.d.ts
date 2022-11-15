@@ -13,6 +13,7 @@ interface BaseFormDrawerType {
   formProps?: BaseFormPropsType, // 表单props
   headerBtns?: HeaderBtnsType, // collapse-panel 内按钮组数据
   collapsePanelActive?: boolean, // 当前 collapse-panel 是否展开 默认true
+  slots?: array, // 是否传入自定义元素（替代BaseForm）
   ref: string, // 当前 collapse-panel form 的 ref, 用于表单提交(ref.submit)
 }
 

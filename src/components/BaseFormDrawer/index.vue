@@ -17,12 +17,21 @@
           <template #extra>
             <HeaderBtns @click="(btn) => headerBtnOnClick({ headerBtn: btn, panel })" :btns="panel.headerBtns"/>
           </template>
+
           <BaseForm
+            v-if="!panel.slots?.length"
             v-bind="panel.formProps || defaultBaseFormProps"
             :data="panel.formData"
             @change="(key, value) => baseFormChange({form: {key, value}, panel})"
             :ref="el => drawerFormRefs[panel.ref] = el"
           />
+          <template v-else>
+            <slot
+              v-for="slot in panel.slots"
+              :name="slot.name"
+              v-bind="slot"
+            />
+          </template>
         </a-collapse-panel>
       </a-collapse>
     </a-spin>

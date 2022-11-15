@@ -269,6 +269,15 @@ const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
       headerBtns: [{ label: "保存信息", value: "addUserInfo" }],
       // collapsePanelActive: true,
       ref: "userInfoRef"
+    },
+    {
+      key: "custom",
+      title: "自定义slot",
+      formData: [],
+      slots: [{name: "custom", data: {city: "成都"}}],
+      // headerBtns: [{ label: "保存信息", value: "addUserInfo" }],
+      // collapsePanelActive: true,
+      ref: "customRef"
     }
   ]
 };

@@ -46,7 +46,11 @@
     :loading="drawerLoading"
     title="订单详情"
     ref="baseFormDrawerRef"
-  />
+  >
+    <template #custom="slotProps">
+      <div class="custom">这是自定义元素 {{slotProps.data.city}}</div>
+    </template>
+  </BaseFormDrawer>
 </template>
 
 <script lang="ts" setup>
