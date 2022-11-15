@@ -20,7 +20,7 @@ const defaultProps = {
 const defaultBaseFormProps = {
   colSpan: 6, // n / 24
   labelCol: { span: 6, offset: 0 },
-  wrapperCol: { span: 18, offset: 0 },
+  wrapperCol: {},
 }
 
 export { defaultProps, defaultBaseFormProps };

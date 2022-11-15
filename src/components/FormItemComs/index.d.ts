@@ -1,3 +1,4 @@
+import type { FormItemProps as AntFormItemProps } from "ant-design-vue";
 import type { AnyPropName } from "@types";
 
 // defineProps 暂时不支持外部导入使用,等待 vue3 官方修复; https://cn.vuejs.org/guide/typescript/composition-api.html#typing-component-props
@@ -27,6 +28,7 @@ interface FormListRowType {
   rules?: Array<AnyPropName>, // 校验规则
   options?: Array<AnyPropName>, // 选择框数据 
   props?: object // 实际内容组件的props集合同antd props 一致; 如 a-input -> placeholeder; 详细信息请前往独立组件中的提示进行查看
+  formItemProps?: AntFormItemProps 
 }
 
 type FormListDatas = FormListRowType[];

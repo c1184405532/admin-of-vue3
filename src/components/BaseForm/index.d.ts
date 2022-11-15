@@ -1,4 +1,4 @@
-import type { AnyPropName } from "@types";
+import type { AnyPropName, FormListDatas } from "@types";
 
 interface PropsType {
   data: FormListDatas, // 数据源

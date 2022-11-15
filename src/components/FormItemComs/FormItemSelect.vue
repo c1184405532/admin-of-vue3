@@ -1,5 +1,6 @@
 <template>
   <a-form-item
+    v-bind="props.formItemProps"
     :name="props.name"
     :label="props.label"
     :rules="props.rules"
@@ -18,7 +19,8 @@
   // props.props 详细参数请查阅官方文档 https://antdv.com/components/select-cn#API
   import { ref, watch } from "vue";
 
-  import type { AnyPropName }  from "@types";
+  import type { FormItemProps as AntFormItemProps } from "ant-design-vue";
+  import type { AnyPropName } from "@/types";
 
   import { useChange } from "./useFormItem";
   import { formItemDefaultProps } from "./const";
@@ -36,6 +38,7 @@
     rules?: Array<AnyPropName>, // 校验规则 同antd 表单校验规则一致
     options?: Array<AnyPropName>, // 配置项数据 如 select 列表数据 tree-select 树下拉数据
     props?: AnyPropName, // 组件额外 props 同antd组件props一致
+    formItemProps?: AntFormItemProps, // a-form-item props
     change?: (value: any, key: string) => void, // 当前项值变化时触发
   }
   

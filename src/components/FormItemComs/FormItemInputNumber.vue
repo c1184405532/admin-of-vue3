@@ -1,5 +1,6 @@
 <template>
   <a-form-item
+    v-bind="props.formItemProps"
     :name="props.name"
     :label="props.label"
     :rules="props.rules"
@@ -18,7 +19,8 @@
 
   import { ref, watch } from "vue";
 
-  import { AnyPropName } from "@/types";
+  import type { FormItemProps as AntFormItemProps } from "ant-design-vue";
+  import type { AnyPropName } from "@/types";
 
   import { useChange } from "./useFormItem";
   import { formItemDefaultProps } from "./const";
@@ -35,6 +37,7 @@
     label: string, // 表单项文本名
     rules?: Array<AnyPropName>, // 校验规则 同antd 表单校验规则一致
     props?: AnyPropName, // 组件额外 props 同antd组件props一致
+    formItemProps?: AntFormItemProps, // a-form-item props
     change?: (value: any, key: string) => void, // 当前项值变化时触发
   }
   

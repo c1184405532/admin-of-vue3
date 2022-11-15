@@ -125,7 +125,7 @@ const formList = [
     }
   }
 ]
-import type { BaseTableColumnsType, BaseFormDrawerListType } from "@types"
+import type { BaseTableColumnsType, BaseFormDrawerListType, FormListDatas } from "@types"
 const columns: BaseTableColumnsType = [
   {
     title: "车牌号",
@@ -193,7 +193,7 @@ data.push({
 });
 }
 
-const createFormDrawerData = () => {
+const createFormDrawerData = (): FormListDatas => {
   const sexOptions = [
     { label: "男", value: "man" },
     { label: "女", value: "woman" },
@@ -208,6 +208,7 @@ const createFormDrawerData = () => {
       props: {
         placeholder: "请输入姓名",
       },
+      formItemProps: {labelCol: {flex: "55px"}},
       rules: [{ required: true, message: "请输入姓名!" }],
     },
     {
@@ -219,6 +220,7 @@ const createFormDrawerData = () => {
       props: {
         placeholder: "请输入年龄",
       },
+      formItemProps: {labelCol: {flex: "55px"}},
       rules: [{ required: true, message: "请输入年龄!" }],
     },
     {
@@ -227,6 +229,7 @@ const createFormDrawerData = () => {
       label: "地址",
       defaultValue: "",
       span: 12,
+      formItemProps: {labelCol: {flex: "55px"}},
       props: {
         placeholder: "请输入地址",
       },
@@ -239,6 +242,7 @@ const createFormDrawerData = () => {
       label: "性别",
       defaultValue: "",
       span: 12,
+      formItemProps: {labelCol: {flex: "55px"}},
       props: {
         placeholder: "请选择性别",
       },
