@@ -1,28 +1,30 @@
 <template>
   <a-breadcrumb>
-    <a-breadcrumb-item>Home</a-breadcrumb-item>
-    <a-breadcrumb-item><a href="">Application Center</a></a-breadcrumb-item>
-    <a-breadcrumb-item><a href="">Application List</a></a-breadcrumb-item>
-    <a-breadcrumb-item>An Application</a-breadcrumb-item>
+    <a-breadcrumb-item v-for="v in routerMatchedTitles" :key="v">{{ v }}</a-breadcrumb-item>
   </a-breadcrumb>
 </template>
 
 <script lang="ts" setup>
-  import { useRouter, onBeforeRouteLeave } from "vue-router";
+  import { ref } from "vue";
+  import { useRoute, useRouter } from "vue-router";
 
+  const route = useRoute();
   const router = useRouter();
-  console.log("router", router);
-  router.beforeEach((to, form) => {
-    console.log("beforeEach", to, form);
+  const routerMatchedTitles = ref<Array<any>>([]);
+
+  router.beforeEach((to) => {
+    setMatchedTitles(to.matched)
     return true;
   })
 
-  onBeforeRouteLeave((to, form) => {
-    console.log("onBeforeRouteLeave", to, form);
-    
-    return false;
-  })
+  setMatchedTitles(route.matched); // 初始化设置 created
 
+  function setMatchedTitles(matcheds: any) {
+    routerMatchedTitles.value = []; // 重置
+    matcheds.forEach((matched: any) => { 
+      if (matched?.meta?.title) routerMatchedTitles.value.push(matched.meta.title);
+    })
+  }
 </script>
   
 <style lang="less" scoped>
