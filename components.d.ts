@@ -7,6 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
+    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     ACol: typeof import('ant-design-vue/es')['Col']
@@ -44,7 +46,7 @@ declare module '@vue/runtime-core' {
     BaseFormDrawer: typeof import('./src/components/BaseFormDrawer/index.vue')['default']
     BaseFormModal: typeof import('./src/components/BaseFormModal/index.vue')['default']
     BaseTable: typeof import('./src/components/BaseTable/index.vue')['default']
-    copy: typeof import('./src/components/BaseFormDrawer/HeaderBtns copy.vue')['default']
+    Breadcrumb: typeof import('./src/components/Layout/Breadcrumb.vue')['default']
     FormItemDatePicker: typeof import('./src/components/FormItemComs/FormItemDatePicker.vue')['default']
     FormItemInput: typeof import('./src/components/FormItemComs/FormItemInput.vue')['default']
     FormItemInputNumber: typeof import('./src/components/FormItemComs/FormItemInputNumber.vue')['default']

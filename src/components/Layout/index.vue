@@ -8,6 +8,7 @@
       </a-layout-header>
 
       <a-layout-content>
+        <Breadcrumb/>
         <router-view></router-view>
       </a-layout-content>
 
@@ -17,14 +18,17 @@
 </template>
 
 <script lang="ts">
-
 import { defineComponent, ref } from "vue";
+
+import Breadcrumb from "./Breadcrumb.vue";
 import SiderBar from "./SiderBar.vue";
 import HeaderBar from "./HeaderBar.vue";
+
 export default defineComponent({
   components: {
     SiderBar,
-    HeaderBar
+    HeaderBar,
+    Breadcrumb
   },
   data() {
     return {
@@ -49,8 +53,11 @@ export default defineComponent({
       box-shadow: 0 0.3px 4px rgb(0 21 41 / 8%);
     }
     .ant-layout-content{
-      padding:  0 16px;
       flex: 1;
+      padding: 16px;
+      margin: 16px;
+      background: #fff;
+      border-radius: 6px;
       overflow: auto;
       // min-width: 1600px;
     }
