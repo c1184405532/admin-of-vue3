@@ -8,7 +8,7 @@
       </a-layout-header>
 
       <a-layout-content>
-        <Breadcrumb/>
+        <BaseBreadcrumb/>
         <router-view></router-view>
       </a-layout-content>
 
@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
-import Breadcrumb from "./Breadcrumb.vue";
+import BaseBreadcrumb from "./BaseBreadcrumb.vue";
 import SiderBar from "./SiderBar.vue";
 import HeaderBar from "./HeaderBar.vue";
 
@@ -28,7 +28,7 @@ export default defineComponent({
   components: {
     SiderBar,
     HeaderBar,
-    Breadcrumb
+    BaseBreadcrumb
   },
   data() {
     return {
