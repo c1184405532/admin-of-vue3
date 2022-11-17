@@ -224,6 +224,19 @@ const createFormDrawerData = (): FormListDatas => {
       rules: [{ required: true, message: "请输入年龄!" }],
     },
     {
+      key: "avatar",
+      type: "upload",
+      label: "头像",
+      defaultValue: "",
+      span: 12,
+      formItemProps: {labelCol: {flex: "55px"}},
+      props: {
+        placeholder: "请上传头像",
+      },
+      options: sexOptions, 
+      rules: [{ required: true, message: "请上传头像!" }],
+    },
+    {
       key: "address",
       type: "input",
       label: "地址",

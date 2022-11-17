@@ -1,5 +1,4 @@
 <template>
-  <h1>首页</h1>
   <BaseForm :data="formList" :loading="loading" @change="formChange" ref="baseFormRef"/>
   <FormSearch
     @change="formChange"

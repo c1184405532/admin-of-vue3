@@ -1,5 +1,5 @@
 <template>
-  <a-breadcrumb>
+  <a-breadcrumb class="breadcrumb-box">
     <a-breadcrumb-item v-for="v in routerMatchedTitles" :key="v">{{ v }}</a-breadcrumb-item>
   </a-breadcrumb>
 </template>
@@ -28,5 +28,7 @@
 </script>
   
 <style lang="less" scoped>
-
+  .breadcrumb-box{
+    padding-bottom: 16px;
+  }
 </style>
