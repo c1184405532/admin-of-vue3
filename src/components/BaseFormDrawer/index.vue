@@ -23,6 +23,7 @@
             v-bind="panel.formProps || defaultBaseFormProps"
             :data="panel.formData"
             @change="(key, value) => baseFormChange({form: {key, value}, panel})"
+            @click="(key, value) => baseFormClick({form: {key, value}, panel})"
             :ref="el => drawerFormRefs[panel.ref] = el"
           />
           <template v-else>
@@ -34,6 +35,8 @@
           </template>
         </a-collapse-panel>
       </a-collapse>
+
+      <Amap v-if="showAmap" v-model="visibleAmap" @submit="mapSubmit"/>
     </a-spin>
   </a-drawer>
 </template>
@@ -41,12 +44,13 @@
 <script lang="ts" setup>
   import { ref, toRefs, watch } from "vue";
 
+  import Amap from "@components/Amap/index.vue";
   import BaseForm from "@components/BaseForm/index.vue";
   import TopBtns from "./TopBtns.vue";
   import HeaderBtns from "./HeaderBtns.vue";
 
   import type { DrawerProps } from "ant-design-vue";
-  import type { BaseFormDrawerListType, DrawerChangeDataType, DrawerClickDataType, AnyPropName } from "@types";
+  import type { BaseFormDrawerListType, DrawerChangeDataType, DrawerClickDataType, AnyPropName, AampAddressType } from "@types";
   import type { TopBtnType, TopBtnsType } from "./index.d";
 
   import { defaultProps, defaultBaseFormProps } from "./const";
@@ -79,6 +83,10 @@
   const drawerFormRefs = ref<AnyPropName>({}); // 所有表单的ref集合 {key: formInstance}
   const _collapseActiveKey = ref<string[]>([]); // 设置展开的面板key
   setCollapseActives();
+
+  const visibleAmap = ref(false);
+  const showAmap = ref(false); // 检查数据源中是否需要加载地图
+  checkShowAamp();
 
   // visible v-model 逻辑
   const _visible = ref(modelValue.value); // 初始化
@@ -117,6 +125,14 @@
     emits("change", data);
   }
 
+  const currentRow = ref();
+  const baseFormClick = ({ form, panel }: any) => {
+    if (form?.key === "address" && !visibleAmap.value) {
+      visibleAmap.value = true;
+    }
+    currentRow.value = {form, panel}; // 当前点击项数据
+  }
+
   async function onSubmit(refKey: string): Promise<object> {
     // 如果做了错误拦截那么获取数据之后需要判断数据是否存在 if (data) { code... }
     // const data = await drawerFormRefs.value[refKey]?.submit()
@@ -132,6 +148,23 @@
       if (v.collapsePanelActive !== false) keys.push(v.key);
     })
     _collapseActiveKey.value = keys;
+  }
+
+  function checkShowAamp() {
+    let flag = false;
+    data.value.forEach(v => {
+      if (Array.isArray(v.formData)) {
+        v.formData.forEach(formRow => {
+          if (formRow.type === "address") flag = true;
+        })
+      }
+    })
+    showAmap.value = flag;
+  }
+
+  const mapSubmit = (address: AampAddressType) => {
+    const { panel, form } = currentRow.value;
+    if (panel?.ref) drawerFormRefs.value[panel.ref].setFormState(form.key, address); // 设置指定key下的表单值
   }
 
   defineExpose({ submit: onSubmit });

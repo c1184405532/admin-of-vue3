@@ -6,6 +6,7 @@ import FormItemTreeSelect from "./FormItemTreeSelect.vue";
 import FormItemDatePicker from "./FormItemDatePicker.vue";
 import FormItemRangePicker from "./FormItemRangePicker.vue";
 import FormItemUpload from "./FormItemUpload.vue";
+import FormItemAddress from "./FormItemAddress.vue";
 
 interface ComsType {
   [key: string]: any
@@ -19,7 +20,8 @@ const ComponentMap: ComsType = {
   "tree-select": FormItemTreeSelect,
   "date-picker": FormItemDatePicker,
   "date-range-picker": FormItemRangePicker,
-  "upload": FormItemUpload
+  "upload": FormItemUpload,
+  "address": FormItemAddress
 }
 
 export default ComponentMap;

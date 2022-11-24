@@ -14,6 +14,7 @@
             <a-tooltip :title="item.tip" :mouseEnterDelay="0.2">
               <component
                 @onChange="onChange"
+                @onClick="onClick"
                 :is="ComponentMap[item.type]"
                 v-model="formState[item.key]"
                 v-bind="item"
@@ -46,7 +47,12 @@
     wrapperCol?: AnyPropName // 表单项 输入控件配置; 类型同 labelCol一致
   }
 
-  const emits = defineEmits(["change"]);
+  interface Emits {
+    (e: "click", key: string, value: any): void;
+    (e: "change", key: string, value: any): void;
+  }
+
+  const emits = defineEmits<Emits>();
   const props = withDefaults(defineProps<PropsType>(), { ...defaultProps }) // defineProps<>(["visible", "modelValue"]);
   const { data, loading, loadingTip, delayTime, labelCol } = toRefs(props);
   
@@ -66,11 +72,16 @@
     }, 120)
   }
 
+  const onClick = (key: string, value: any): void => {
+    emits("click", key, value);
+  }
+
   function setDefaultFormState() {
     data.value.forEach(v => {
       if (formState[v.key] !== v.defaultValue) {
-        // select 的默认值如果为 "" 该组件会认为有值
-        const defaultValue = v.type === "select" && v.defaultValue === "" ? undefined : v.defaultValue; 
+        const filterType = ["select", "address"]; // 过滤数组中存在的类型的默认值 需要设为undefined
+        const flag = filterType.find(type => v.type === type);
+        const defaultValue = flag && v.defaultValue === "" ? undefined : v.defaultValue; 
         formState[v.key] = defaultValue;
       }
     });
@@ -104,7 +115,7 @@
     return {};
   };
 
-  const setFormState = (key: string | AnyPropName, value?: any) => {
+  const setFormState = (key: string | AnyPropName, value?: any) => {  
     const type = key ? typeof key : "not";
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

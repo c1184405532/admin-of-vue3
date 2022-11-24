@@ -11,7 +11,9 @@ import type {
   BaseTableInstance
 } from "@components/BaseTable";
 
-import type { BaseFormDrawerType, BaseFormDrawerListType, DrawerClickDataType, DrawerChangeDataType } from "@components/BaseFormDrawer"; 
+import type { BaseFormDrawerType, BaseFormDrawerListType, DrawerClickDataType, DrawerChangeDataType } from "@components/BaseFormDrawer";
+
+import type { AddressType as AampAddressType } from "@components/Amap"; 
 
 interface AnyPropName {
   [propname: string | symbol]: any
@@ -40,5 +42,7 @@ export type {
   BaseFormDrawerType,
   BaseFormDrawerListType,
   DrawerClickDataType,
-  DrawerChangeDataType
+  DrawerChangeDataType,
+
+  AampAddressType
 }

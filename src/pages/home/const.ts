@@ -238,13 +238,14 @@ const createFormDrawerData = (): FormListDatas => {
     },
     {
       key: "address",
-      type: "input",
+      type: "address",
       label: "地址",
       defaultValue: "",
       span: 12,
       formItemProps: {labelCol: {flex: "55px"}},
       props: {
         placeholder: "请输入地址",
+
       },
       options: [],
       rules: [{ required: true, message: "请输入地址!" }],

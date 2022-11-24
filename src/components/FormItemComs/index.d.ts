@@ -16,6 +16,7 @@ interface FormItemProps {
 interface FormItemEmits {
   (e: "update:modelValue", value: any): void,
   (e: "onChange", value: any, key: string): void,
+  (e: "onClick", value: any, key: string): void
 }
 
 interface FormListRowType {
