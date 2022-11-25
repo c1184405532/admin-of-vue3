@@ -10,7 +10,7 @@
       <a-select
         v-model:value="inputValue"
         @search="() => {}"
-        :allowClear="true"
+        :allowClear="false"
         :showSearch="true"
         :showArrow="false"
         :filter-option="false"

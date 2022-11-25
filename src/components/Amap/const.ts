@@ -5,4 +5,6 @@ const defaultProps = {
   footer: null
 }
 
-export { defaultProps };
+const AampWebJsKey = "295edb82912c34ddcc052ca31517f878";
+
+export { defaultProps, AampWebJsKey };

@@ -36,7 +36,7 @@
   import type { ModalProps } from "ant-design-vue";
   import type { AddressType, AddressListType } from "./";
 
-  import { defaultProps } from "./const";
+  import { defaultProps, AampWebJsKey } from "./const";
 
   interface PropsType extends ModalProps {
     modelValue: boolean,
@@ -117,7 +117,7 @@
     nextTick(() => {
       // eslint-disable-next-line
       AMapLoader?.load({
-        key: "295edb82912c34ddcc052ca31517f878", // 申请好的Web端开发者Key，首次调用 load 时必填
+        key: AampWebJsKey, // 申请好的Web端开发者Key，首次调用 load 时必填
         version: "2.0", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
         plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
         AMapUI: {
