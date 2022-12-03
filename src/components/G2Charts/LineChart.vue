@@ -1,46 +1,37 @@
 <template>
-  <div class="line-chart-container" id="line-chart-container"></div>
+  <div class="line-chart-container" ref="chartRef"></div>
 </template>
 
 <script lang="ts" setup>
+  import { ref, onMounted, watch } from "vue";
   import { Line } from "@antv/g2plot";
-  import { onMounted } from "vue";
-  const data = [
-    { year: "1991", value: 3 },
-    { year: "1992", value: 4 },
-    { year: "1993", value: 3.5 },
-    { year: "1994", value: 5 },
-    { year: "1995", value: 4.9 },
-    { year: "1996", value: 6 },
-    { year: "1997", value: 7 },
-    { year: "1998", value: 9 },
-    { year: "1999", value: 13 },
-    { year: "1999", value: 8 },
-  ];
+  import type { Options, Line as LineType } from "@antv/g2plot";
 
-  
+  interface PropsType {
+    options: Options
+  }
+
+  const chartRef = ref();
+  const chartInstance = ref<LineType>();
+  const props = withDefaults(defineProps<PropsType>(), {});
+
+  watch(props.options, n => {
+    if (chartInstance.value) chartInstance.value.update(n); // 必须在dom生成后才能更新, 假设onMounted未执行时options已经改变了也无需更新, 最后会在onMounted中进行初始化。
+  })
 
   onMounted(() => {
     initChart();
   })
 
   function initChart() {
-    const line = new Line("line-chart-container", {
-      data,
-      padding: "auto",
-      xField: "year",
-      yField: "value"
-    });
-
-    line.render();
+    chartInstance.value = new Line(chartRef.value, props.options);
+    chartInstance.value.render();
   }
   
+  defineExpose({ chartInstance: chartInstance.value }); // 暴露实例方法 用于自定义使用 https://g2plot.antv.antgroup.com/api/plot-api
 
 </script>
 
 <style lang="less" scoped>
-  .line-chart-container{
-    height: 500px;
-    width: 800px;
-  }
+  // .line-chart-container{}
 </style>

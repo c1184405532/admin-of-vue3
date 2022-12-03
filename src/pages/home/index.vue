@@ -1,6 +1,6 @@
 <template>
   <!-- <BaseForm :data="formList" :loading="loading" @change="formChange" ref="baseFormRef"/> -->
-  <LineChart/>
+  <LineChart :options="lineChartOptions"/>
   <FormSearch
     @change="formChange"
     @search="onSearch"
@@ -67,7 +67,7 @@
 
   import { LineChart } from "@components/G2Charts";
 
-  import { formList, columns, tableHeaderBtns, createBaseFormDrawerList } from "./const";
+  import { formList, columns, tableHeaderBtns, createBaseFormDrawerList, defaultLineOptions } from "./const";
   
   type Key = string | number;
 
@@ -89,6 +89,8 @@
   const baseFormModalVisible = ref(false);
   const drawerLoading = ref(false);
 
+  const lineChartOptions = ref(defaultLineOptions);
+
   const formChange = (key: string, value: any): void => {
     console.log("formChange",key, value);
     if (key === "age") {
@@ -104,7 +106,9 @@
   watch(baseFormModalVisible, value => {
     console.log("baseFormModalVisible", baseFormModalVisible.value);
     
-  })  
+  })
+
+  const lineChartRef1 = ref();
 
   onMounted(() => {
     console.log("FormSearchRef", formRef.value!.getFormState());
@@ -119,6 +123,7 @@
         { label: "new-henan", value: "new-heinan" },
       ]
       loading.value = false;
+      lineChartOptions.value.data[0].value = 99;
     }, 1500)
     
   })
