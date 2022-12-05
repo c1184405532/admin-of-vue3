@@ -296,23 +296,42 @@ const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
   ]
 };
 
-import type { ChartOptions } from "@components/G2Charts/index.d";
+import type { ChartOptions, PieOptions } from "@components/G2Charts/index.d";
+const defaultData = [
+  { year: "1991", value: 3 },
+  { year: "1992", value: 4 },
+  { year: "1993", value: 3.5 },
+  { year: "1994", value: 5 },
+  { year: "1995", value: 4.9 },
+  { year: "1996", value: 6 },
+  { year: "1997", value: 7 },
+  { year: "1998", value: 9 },
+  { year: "1999", value: 13 },
+  { year: "1999", value: 8 },
+]
 const defaultLineOptions: ChartOptions = {
   padding: "auto",
   xField: "year",
   yField: "value",
-  data: [
-    { year: "1991", value: 3 },
-    { year: "1992", value: 4 },
-    { year: "1993", value: 3.5 },
-    { year: "1994", value: 5 },
-    { year: "1995", value: 4.9 },
-    { year: "1996", value: 6 },
-    { year: "1997", value: 7 },
-    { year: "1998", value: 9 },
-    { year: "1999", value: 13 },
-    { year: "1999", value: 8 },
-  ]
+  data: defaultData
+}
+
+const defaultPieOptions: PieOptions = {
+  appendPadding: 10,
+  data: defaultData,
+  angleField: "value",
+  colorField: "year",
+  radius: 0.9,
+  // label: {
+  //   type: "inner",
+  //   offset: "-30%",
+  //   content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
+  //   style: {
+  //     fontSize: 14,
+  //     textAlign: "center",
+  //   },
+  // },
+  interactions: [{ type: "element-active" }],
 }
 
 export {
@@ -321,7 +340,8 @@ export {
   columns,
   tableHeaderBtns,
   createBaseFormDrawerList,
-  defaultLineOptions
+  defaultLineOptions,
+  defaultPieOptions
 }
 
 export type { FormListRowType, AnyPropName }

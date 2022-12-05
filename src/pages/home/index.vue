@@ -1,7 +1,9 @@
 <template>
   <!-- <BaseForm :data="formList" :loading="loading" @change="formChange" ref="baseFormRef"/> -->
+  <PieChart :options="pieChartOptions"/>
   <LineChart :options="lineChartOptions"/>
   <ColumnChart :options="lineChartOptions"/>
+  
   <FormSearch
     @change="formChange"
     @search="onSearch"
@@ -66,9 +68,9 @@
   import BaseFormModal from "@components/BaseFormModal/index.vue";
   import BaseForm from "@components/BaseForm/index.vue";
 
-  import { LineChart, ColumnChart } from "@components/G2Charts";
+  import { LineChart, ColumnChart, PieChart } from "@components/G2Charts";
 
-  import { formList, columns, tableHeaderBtns, createBaseFormDrawerList, defaultLineOptions } from "./const";
+  import { formList, columns, tableHeaderBtns, createBaseFormDrawerList, defaultLineOptions, defaultPieOptions } from "./const";
   
   type Key = string | number;
 
@@ -91,6 +93,7 @@
   const drawerLoading = ref(false);
 
   const lineChartOptions = ref(defaultLineOptions);
+  const pieChartOptions = ref(defaultPieOptions);
 
   const formChange = (key: string, value: any): void => {
     console.log("formChange",key, value);
