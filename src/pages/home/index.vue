@@ -1,6 +1,7 @@
 <template>
   <!-- <BaseForm :data="formList" :loading="loading" @change="formChange" ref="baseFormRef"/> -->
   <LineChart :options="lineChartOptions"/>
+  <ColumnChart :options="lineChartOptions"/>
   <FormSearch
     @change="formChange"
     @search="onSearch"
@@ -65,7 +66,7 @@
   import BaseFormModal from "@components/BaseFormModal/index.vue";
   import BaseForm from "@components/BaseForm/index.vue";
 
-  import { LineChart } from "@components/G2Charts";
+  import { LineChart, ColumnChart } from "@components/G2Charts";
 
   import { formList, columns, tableHeaderBtns, createBaseFormDrawerList, defaultLineOptions } from "./const";
   

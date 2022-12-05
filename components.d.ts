@@ -52,6 +52,7 @@ declare module '@vue/runtime-core' {
     BaseFormDrawer: typeof import('./src/components/BaseFormDrawer/index.vue')['default']
     BaseFormModal: typeof import('./src/components/BaseFormModal/index.vue')['default']
     BaseTable: typeof import('./src/components/BaseTable/index.vue')['default']
+    ColumnChart: typeof import('./src/components/G2Charts/ColumnChart.vue')['default']
     FormItemAddress: typeof import('./src/components/FormItemComs/FormItemAddress.vue')['default']
     FormItemDatePicker: typeof import('./src/components/FormItemComs/FormItemDatePicker.vue')['default']
     FormItemInput: typeof import('./src/components/FormItemComs/FormItemInput.vue')['default']
