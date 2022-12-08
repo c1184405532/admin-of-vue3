@@ -296,7 +296,7 @@ const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
   ]
 };
 
-import type { ChartOptions, PieOptions } from "@components/G2Charts/index.d";
+import type { ChartOptions, PieOptions, GaugeOptions } from "@components/G2Charts/index.d";
 const defaultData = [
   { year: "1991", value: 3 },
   { year: "1992", value: 4 },
@@ -334,6 +334,44 @@ const defaultPieOptions: PieOptions = {
   interactions: [{ type: "element-active" }],
 }
 
+const defaultGaugeOptions: GaugeOptions = {
+  percent: 0.75,
+  range: {
+    color: "#30BF78",
+  },
+  indicator: {
+    pointer: {
+      style: {
+        stroke: "#D0D0D0",
+      },
+    },
+    pin: {
+      style: {
+        stroke: "#D0D0D0",
+      },
+    },
+  },
+  axis: {
+    label: {
+      formatter(v: string) {
+        return Number(v) * 100;
+      },
+    },
+    subTickLine: {
+      count: 3,
+    },
+  },
+  statistic: {
+    content: {
+      formatter: ({ percent }: any) => `Rate: ${(percent * 100).toFixed(0)}%`,
+      style: {
+        color: "rgba(0,0,0,0.65)",
+        fontSize: "48",
+      },
+    },
+  },
+}
+
 export {
   formList,
   data,
@@ -341,7 +379,8 @@ export {
   tableHeaderBtns,
   createBaseFormDrawerList,
   defaultLineOptions,
-  defaultPieOptions
+  defaultPieOptions,
+  defaultGaugeOptions
 }
 
 export type { FormListRowType, AnyPropName }

@@ -1,4 +1,6 @@
-import type { Options, ColumnOptions, PieOptions, Line } from "@antv/g2plot";
+import type {
+  Options, ColumnOptions, PieOptions, GaugeOptions, Line
+} from "@antv/g2plot";
 
 interface ChartOptions extends Options {
   xField: string, // x轴字段名 对应data中的对象key
@@ -11,5 +13,6 @@ export type {
   ChartOptions,
   ColumnOptions,
   PieOptions,
+  GaugeOptions,
   ChartLine
 }

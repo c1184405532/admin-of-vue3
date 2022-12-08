@@ -63,6 +63,7 @@ declare module '@vue/runtime-core' {
     FormItemTreeSelect: typeof import('./src/components/FormItemComs/FormItemTreeSelect.vue')['default']
     FormItemUpload: typeof import('./src/components/FormItemComs/FormItemUpload.vue')['default']
     FormSearch: typeof import('./src/components/FormSearch/index.vue')['default']
+    GaugeChart: typeof import('./src/components/G2Charts/GaugeChart.vue')['default']
     HeaderBar: typeof import('./src/components/Layout/HeaderBar.vue')['default']
     HeaderBtns: typeof import('./src/components/BaseFormDrawer/HeaderBtns.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
