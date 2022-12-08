@@ -1,5 +1,7 @@
 import type {
-  Options, ColumnOptions, PieOptions, GaugeOptions, Line
+  Options, ColumnOptions, PieOptions, GaugeOptions, 
+  LiquidOptions,
+  Line
 } from "@antv/g2plot";
 
 interface ChartOptions extends Options {
@@ -14,5 +16,6 @@ export type {
   ColumnOptions,
   PieOptions,
   GaugeOptions,
+  LiquidOptions,
   ChartLine
 }

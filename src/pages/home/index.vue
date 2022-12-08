@@ -4,6 +4,7 @@
   <LineChart :options="lineChartOptions"/>
   <ColumnChart :options="lineChartOptions"/>
   <GaugeChart :options="gaugeChartOptions"/>
+  <LiquidChart :options="liquidChartOptions"/>
   <FormSearch
     @change="formChange"
     @search="onSearch"
@@ -68,11 +69,11 @@
   import BaseFormModal from "@components/BaseFormModal/index.vue";
   import BaseForm from "@components/BaseForm/index.vue";
 
-  import { LineChart, ColumnChart, PieChart, GaugeChart } from "@components/G2Charts";
+  import { LineChart, ColumnChart, PieChart, GaugeChart, LiquidChart } from "@components/G2Charts";
 
   import {
     formList, columns, tableHeaderBtns, createBaseFormDrawerList, defaultLineOptions, defaultPieOptions,
-    defaultGaugeOptions,
+    defaultGaugeOptions, defaultLiquidOptions
   } from "./const";
   
   type Key = string | number;
@@ -98,6 +99,7 @@
   const lineChartOptions = ref(defaultLineOptions);
   const pieChartOptions = ref(defaultPieOptions);
   const gaugeChartOptions = ref(defaultGaugeOptions);
+  const liquidChartOptions = ref(defaultLiquidOptions);
 
   const formChange = (key: string, value: any): void => {
     console.log("formChange",key, value);

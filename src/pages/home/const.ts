@@ -296,7 +296,7 @@ const createBaseFormDrawerList = (config = {}): BaseFormDrawerListType => {
   ]
 };
 
-import type { ChartOptions, PieOptions, GaugeOptions } from "@components/G2Charts/index.d";
+import type { ChartOptions, PieOptions, GaugeOptions, LiquidOptions } from "@components/G2Charts/index.d";
 const defaultData = [
   { year: "1991", value: 3 },
   { year: "1992", value: 4 },
@@ -372,6 +372,17 @@ const defaultGaugeOptions: GaugeOptions = {
   },
 }
 
+const defaultLiquidOptions: LiquidOptions = {
+  percent: 0.25,
+  outline: {
+    border: 4,
+    distance: 8,
+  },
+  wave: {
+    length: 128,
+  },
+}
+
 export {
   formList,
   data,
@@ -380,7 +391,8 @@ export {
   createBaseFormDrawerList,
   defaultLineOptions,
   defaultPieOptions,
-  defaultGaugeOptions
+  defaultGaugeOptions,
+  defaultLiquidOptions
 }
 
 export type { FormListRowType, AnyPropName }

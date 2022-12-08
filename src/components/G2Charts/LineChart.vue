@@ -5,14 +5,14 @@
 <script lang="ts" setup>
   import { ref, onMounted, watch } from "vue";
   import { Line } from "@antv/g2plot";
-  import type { Options, Line as LineType } from "@antv/g2plot";
+  import type { Options, Line as LineInstance } from "@antv/g2plot";
 
   interface PropsType {
     options: Options
   }
 
   const chartRef = ref();
-  const chartInstance = ref<LineType>();
+  const chartInstance = ref<LineInstance>();
   const props = withDefaults(defineProps<PropsType>(), {});
 
   watch(props.options, n => {

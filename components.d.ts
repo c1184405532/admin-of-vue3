@@ -68,6 +68,7 @@ declare module '@vue/runtime-core' {
     HeaderBtns: typeof import('./src/components/BaseFormDrawer/HeaderBtns.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     LineChart: typeof import('./src/components/G2Charts/LineChart.vue')['default']
+    LiquidChart: typeof import('./src/components/G2Charts/LiquidChart.vue')['default']
     PieChart: typeof import('./src/components/G2Charts/PieChart.vue')['default']
     RenderRouterView: typeof import('./src/components/RenderRouterView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

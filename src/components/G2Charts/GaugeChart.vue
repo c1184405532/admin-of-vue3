@@ -5,14 +5,14 @@
 <script lang="ts" setup>
   import { ref, onMounted, watch } from "vue";
   import { Gauge } from "@antv/g2plot";
-  import type { GaugeOptions, Gauge as GaugeType } from "@antv/g2plot";
+  import type { GaugeOptions, Gauge as GaugeInstance } from "@antv/g2plot";
 
   interface PropsType {
     options: GaugeOptions
   }
 
   const chartRef = ref();
-  const chartInstance = ref<GaugeType>();
+  const chartInstance = ref<GaugeInstance>();
   const props = withDefaults(defineProps<PropsType>(), {});
 
   watch(props.options, n => {

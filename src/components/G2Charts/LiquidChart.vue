@@ -1,18 +1,18 @@
 <template>
-  <div class="column-chart-container" ref="chartRef"></div>
+  <div class="liquid-chart-container" ref="chartRef"></div>
 </template>
 
 <script lang="ts" setup>
   import { ref, onMounted, watch } from "vue";
-  import { Column } from "@antv/g2plot";
-  import type { ColumnOptions, Column as ColumnInstance } from "@antv/g2plot";
+  import { Liquid } from "@antv/g2plot";
+  import type { LiquidOptions, Liquid as LiquidInstance } from "@antv/g2plot";
 
   interface PropsType {
-    options: ColumnOptions
+    options: LiquidOptions
   }
 
   const chartRef = ref();
-  const chartInstance = ref<ColumnInstance>();
+  const chartInstance = ref<LiquidInstance>();
   const props = withDefaults(defineProps<PropsType>(), {});
 
   watch(props.options, n => {
@@ -24,7 +24,7 @@
   })
 
   function initChart() {
-    chartInstance.value = new Column(chartRef.value, props.options);
+    chartInstance.value = new Liquid(chartRef.value, props.options);
     chartInstance.value.render();
   }
   
