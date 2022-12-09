@@ -134,7 +134,7 @@
     
     loading.value = true;
 
-    const  { data } = await useGetTableList(requestUrl.value, payload);
+    const { data } = await useGetTableList(requestUrl.value, payload);
     tableSource.value = data.records;
     pagination.value.total = data.total;
 

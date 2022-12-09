@@ -18,7 +18,7 @@ import ListTwo from "@/pages/nested/listTwo/index.vue";
 
 const layoutRoutes: RouteRecordRaw[] = [
   { meta: { title: "首页" }, path: "home", name: "home", component: Home },
-  { meta: { title: "表格页" }, path: "table", name: "table", component: Table },
+  { meta: { title: "表格示例" }, path: "table", name: "table", component: Table },
   {
     meta: { title: "嵌套列表" },
     path: "nested",
